@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<title>center</title>
+	<style>
+		div{
+			border: 1px solid #000;
+			background-color: #eee;
+		}
+		.div1{
+			height: 300px;
+			line-height: 50px;
+			text-align: center;
+		}
+		.div2 div{
+			/*display: table-cell;*/
+			width: 50%;
+			margin: 0 auto;
+			background-color: #999;
+		}
+		.div3{
+			float: left;
+			position: relative;
+			top: 50%;
+			left: 50%;
+		}
+		.div3 div{
+			position: relative;
+			left: -50%;
+			top: -50%;
+			background-color: #21a077;
+		}
+	</style>
+</head>
+<body>
+	<div class="div1">行内元素<br />
+		<img src="x.png" alt="这里有张图片" width="160" height="80" />
+		水平居中：给父元素设置text-align:center；<br />
+		单行定高垂直居中：令父元素的line-height==height；<br />
+		多行定高垂直居中：放入table中（默认vertical-align:middle）
+	</div>
+	<div class="div2">
+		<div>
+			定宽块元素<br />
+			水平居中：设置margin:0 auto；<br />
+			垂直居中：放入table中，或设置display:table-cell（IE7-不支持）
+		</div>
+	</div>
+	<div class="div3">
+		<div>
+			不定宽块元素
+			<ol>水平居中：
+				<li>放入table中</li>
+				<li>设置display:inline</li>
+				<li>父元素float:left;position:relative和left:50%及top:50%，自身postion:relative和left:-50%及top:-50%</li>
+			</ol>
+			<p>垂直居中：同定宽块元素</p>
+		</div>
+	</div>
+</body>
+</html>

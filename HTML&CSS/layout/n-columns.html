@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<title>N列布局</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			font: 30px "Microsoft Yahei" bold;
+		}
+		div{
+			line-height: 50px;
+			text-align: center;
+		}
+		.main, .footer{
+			width: 950px;
+			margin: 0 auto;
+		}
+		/* 顶栏 */
+		.header{
+			height: 50px;
+			background-color: #ccc;
+		}
+		/* 正文 */
+		.main{
+			position: relative;
+			height: 600px;
+			background-color: #fcc;
+		}
+		/* 三列布局 */
+		.mn-left{
+			position: absolute;
+			top: 50px;
+			bottom: 0;
+			left: 0;
+			width: 200px;
+			background-color: #eee;
+		}
+		.mn-mid{
+			height: 550px;
+			margin: 0 210px;
+			background-color: #966;
+		}
+		.mn-right{
+			position: absolute;
+			top: 50px;
+			bottom: 0;
+			right: 0;
+			width: 200px;
+			background-color: #eee;
+		}
+		/* 底栏 */
+		.footer{
+			clear: both;
+			height: 150px;
+			background-color: #9cf;
+		}
+		/* 两列布局 */
+		.ft-left{
+			float: left;
+			width: 300px;
+			height: 100px;
+			background-color: #f00;
+		}
+		.ft-right{
+			float: right;
+			width: 600px;
+			height: 100px;
+			background-color: #ff0;
+		}
+	</style>
+</head>
+<body>
+	<div class="header">head</div>
+	<div class="main">
+		<h2>main，水平居中</h2>
+		<div class="mn-left">left</div>
+		<div class="mn-mid">center</div>
+		<div class="mn-right">right</div>
+	</div>
+	<div class="footer">
+		<h3>foot，水平居中</h3>
+		<div class="ft-left">left</div>
+		<div class="ft-right">right</div>
+	</div>
+</body>
+</html>

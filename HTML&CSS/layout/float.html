@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<title>浮动布局</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			color: #fff;
+		}
+		#wrap{
+			margin: 0 auto;
+			width: 960px;
+			background-color: #00c;
+		}
+		#hd{
+			width: 100%;
+			background-color: #f30;
+		}
+		#bd{
+			background-color: #fc0;
+			overflow: hidden;
+		}
+		.left{
+			float: left; /* 左浮动 */
+			width: 800px;
+			height: 200px;
+			background-color: #000;
+		}
+		.right{
+			float: right; /* 右浮动 */
+			width: 140px;
+			height: 500px;
+			background-color: #690;
+		}
+		#ft{
+			width: 100%;
+			background-color: #639;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<div id="hd">头部</div>
+		<div id="bd">
+			<div class="left">左侧</div>
+			<div class="right">右侧</div>
+		</div>
+		<div id="ft">底部</div>
+	</div>
+</body>
+</html>

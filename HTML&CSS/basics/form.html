@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<title>form</title>
+	<!-- 引入外部css -->
+	<link rel="stylesheet" href="css.css" />
+	<!-- 内部css -->
+	<style>
+		label,button,input{
+			display: block;
+		}
+	</style>
+	<!-- 引入外部JS -->
+	<script type="text/javascript" src="js.js"></script>
+	<!-- 内部JS -->
+	<script>
+		// 这里写JS代码
+	</script>
+	<!-- 不支持JS时 -->
+	<noscript>不支持JS</noscript>
+</head>
+<body>
+	<form action="x.php" method="get">
+		<fieldset>
+			<legend>表单1</legend>
+			<label for="uid">账号：</label>
+			<input type="text" name="uid" id="uid" />
+			<label>密码：<input type="password" name="pwd" id="pwd" /></label>
+			<label>Email：<input type="email" name="email" id="email" /></label>
+			<textarea name="txtarea" id="txtarea" cols="30" rows="10">这个是文本域</textarea>
+			<button type="reset">重置</button>
+		</fieldset>
+		<fieldset>
+			<legend>表单2</legend>
+			<label>多选按钮：<input type="checkbox" name="ckb" id="ckb" /></label>
+			<label>单选按钮：<input type="radio" name="radio" id="radio" /></label>
+			<select name="sel" id="sel">
+				<option value="下拉1">下拉1</option>
+				<option value="下拉2" selected="selected">下拉2</option>
+				<option value="下拉3">下拉3</option>
+			</select>
+			<button type="submit">提交</button>
+		</fieldset>
+	</form>
+</body>
+</html>
