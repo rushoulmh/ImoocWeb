@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<title>信息滚动</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		dl{
+			border: 1px solid #eee;
+			margin-left: 100px;
+			width: 300px;
+			list-style: none;
+		}
+		dl dt{
+			font: 14px/1.5 "Microsoft Yahei" bold;
+		}
+		div{
+			width: 400px;
+			height: 100px;
+			margin-top: 20px;
+			border: 5px solid #ababab;
+			text-align: left;
+			overflow: hidden;
+		}
+		ul{
+			font-size: 12px;
+			list-style: none;
+		}
+		ul li{
+			height: 20px;
+		}
+		ul a{
+			text-decoration: none;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<!-- marquee标签 -->
+	<dl>
+		<dt>marquee默认滚动，鼠标移入暂停</dt>
+		<dd><marquee onmouseover="this.stop()" onmouseout="this.start()">我默认向左滚</marquee></dd>
+		<dt>marquee右滚动</dt>
+		<dd><marquee direction="right" scrolldelay="500">我向右滚动</marquee></dd>
+		<dt>marquee循环来回滚动</dt>
+		<dd><marquee behavior="alternate" scrollamount="8" loop="3">我来回滚动</marquee></dd>
+		<dt>marquee上滚动</dt>
+		<dd><marquee direction="up" bgcolor="#ddd" width="250" height="55">我在区域内向上滚动</marquee></dd>
+	</dl>
+	<!-- 无缝滚动 -->
+	<div id="area1">
+		<ul>
+			<li><a href="#">1.学会html5（案例）</a><span>2013-09-18</span></li>
+			<li><a href="#">2.tab页面切换效果（案例）</a><span>2013-10-09</span></li>
+			<li><a href="#">3.圆角水晶按钮制作（案例）</a><span>2013-10-21</span></li>
+			<li><a href="#">4.HTML+CSS基础课程(系列)</a><span>2013-11-01</span></li>
+			<li><a href="#">5.分页页码制作（案例）</a><span>2013-11-06</span></li>
+			<li><a href="#">6.导航条菜单的制作（案例）</a><span>2013-11-08</span></li>
+			<li><a href="#">7.信息列表制作(案例)</a><span>2013-11-15</span></li>
+			<li><a href="#">8.下拉菜单制作(案例)</a><span>2013-11-22</span></li>
+		</ul>
+		<ul></ul>
+	</div>
+	<!-- 间歇滚动 -->
+	<div id="area2">
+		<ul>
+			<li><a href="#">1.学会html5（案例）</a><span>2013-09-18</span></li>
+			<li><a href="#">2.tab页面切换效果（案例）</a><span>2013-10-09</span></li>
+			<li><a href="#">3.圆角水晶按钮制作（案例）</a><span>2013-10-21</span></li>
+			<li><a href="#">4.HTML+CSS基础课程(系列)</a><span>2013-11-01</span></li>
+			<li><a href="#">5.分页页码制作（案例）</a><span>2013-11-06</span></li>
+			<li><a href="#">6.导航条菜单的制作（案例）</a><span>2013-11-08</span></li>
+			<li><a href="#">7.信息列表制作(案例)</a><span>2013-11-15</span></li>
+			<li><a href="#">8.下拉菜单制作(案例)</a><span>2013-11-22</span></li>
+		</ul>
+		<ul></ul>
+	</div>
+
+	<script type="text/javascript">
+		// 无缝滚动
+		+function(){
+			var area1 = document.getElementById("area1"),
+				uls = area1.getElementsByTagName("ul");
+			area1.scrollTop = 0;
+			uls[1].innerHTML = uls[0].innerHTML; // 复制ul1
+
+			// 向上滚动
+			function scroll(){
+				// 判断ul1的底端是否到达容器的顶端
+				if(area1.scrollTop >= uls[0].scrollHeight){
+					area1.scrollTop = 0;
+				} else{
+					area1.scrollTop++;
+				}
+			}
+			
+			var timer1 = setInterval(scroll, 50);
+			// 鼠标移入时暂停滚动
+			area1.onmouseover = function(){
+				clearInterval(timer1);
+			};
+			// 鼠标移出时继续滚动
+			area1.onmouseout = function(){
+				timer1 = setInterval(scroll, 50);
+			};
+		}();
+
+		// 间歇滚动
+		+function(){
+			var area2 = document.getElementById("area2");
+			var iH = 20, // 单行滚动的高度
+				speed = 50,
+				delay = 2000,
+				timer2 = null;
+			area2.scrollTop = 0;
+			area2.innerHTML += area2.innerHTML;
+
+			// 开始运动
+			function startMove(){
+				timer2 = setInterval(interScroll, speed);
+				area2.scrollTop++;
+			}
+			// 向上滚动
+			function interScroll(){
+				if(area2.scrollTop % iH == 0){ // 注意单行高度必须能整除area高度
+					// 每滚动一行就停顿2秒
+					clearInterval(timer2);
+					setTimeout(startMove, delay);
+				} else{
+					area2.scrollTop++;
+					if(area2.scrollTop >= area2.scrollHeight/2){
+						area2.scrollTop = 0;
+					}					
+				}
+			}
+			setTimeout(startMove, delay);
+		}();
+	</script>
+</body>
+</html>

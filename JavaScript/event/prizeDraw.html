@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+    <meta charset="UTF-8">
+    <title>抽奖系统</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #tt{
+            width: 400px;
+            height: 70px;
+            padding-top: 30px;
+            margin: 0 auto;
+            font-size: 24px;
+            font-weight: bold;
+            color: #f00;
+            text-align: center;
+        }
+        .btns{
+            width: 190px;
+            height: 30px;
+            margin: 0 auto;
+        }
+        .btns button{
+            /*display: block;*/
+            float: left;
+            width: 80px;
+            height: 27px;
+            margin-right: 10px;
+            /*border: 1px solid #eee;
+            border-radius: 7px;*/
+            font: 14px/27px "Microsoft Yahei";
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="tt">开始抽奖啦！</div>
+    <div class="btns">
+        <button>开 始</button>
+        <button>停 止</button>
+    </div>
+
+    <script type="text/javascript">
+        var data = ["ipad", "note7", "camera","printer", "thanks", "$50", "$1000"],
+            timer = null,
+            flag = false,
+            btns = document.getElementsByTagName("button");
+
+        window.onload = function(){
+            // 开始
+            btns[0].onclick = play;
+            function play(){
+                var tt = document.getElementById("tt");
+                clearInterval(timer);
+                timer = setInterval(function(){
+                    var n = Math.floor(Math.random()*data.length);
+                    tt.innerHTML = data[n];
+                }, 50);
+                btns[0].style.backgroundColor = "#999";
+            }
+
+            // 停止
+            btns[1].onclick = stop;
+            function stop(){
+                clearInterval(timer);
+                btns[0].style.backgroundColor = "#036";
+            }
+
+            // 键盘事件
+            document.onkeyup = function(e){
+                e = e || window.event;
+                if(e.keyCode == 13){
+                    flag ? play() : stop();
+                    flag = !flag;
+                }
+            };
+        }
+    </script>
+</body>
+</html>

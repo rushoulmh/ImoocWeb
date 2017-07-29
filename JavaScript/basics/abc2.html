@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<title>JS基础知识2</title>
+	<style>
+		body{font-size: 12px;}
+		input{width: 40px;}
+		div{/*border: 1px solid #eee;*/ margin: 10px 5px;}
+	</style>
+</head>
+<body>
+	<button onclick="showPattern()">输出图案</button>
+	<div id="arr"></div>
+	<hr />
+	<button onclick="calculate()">运算</button>
+	<div id="op">
+		<p>
+			a&gt;b&nbsp;&amp;&amp;&nbsp;a*b&gt;0&nbsp;=&nbsp;<input type="text" />，
+			此时a=<input type="text" />，
+			b=<input type="text" />
+		</p>
+		<p>
+			(++a+23)&nbsp;/&nbsp;(12-b--)&nbsp;*&nbsp;3&nbsp;=&nbsp;<input type="text" />，
+			此时a=<input type="text" />，
+			b=<input type="text" />
+		</p>
+	</div>
+	<hr />
+	<button onclick="getNames()">筛选姓名</button>
+	<div id="flow"></div>
+	<hr />
+	<button onclick="showDate()">显示时间</button>
+	<div id="date"></div>
+	<script type="text/javascript">
+		// 输出图案
+		function showPattern(){
+			var div = document.getElementById("arr");
+			// 创建数组
+			var arr = ["*", "##", "***", "&&", "****","##*"];
+			arr[7] = "**";
+			// 显示长度
+			var len = arr.length,
+				s = "";
+			// alert(len);
+			// 输出数组内容
+			for(var i=0; i<len; i++){
+				if(i == 1){
+					s += arr[7] + "<br />";
+				} else if(i%2==0 && arr[i]){
+					s += arr[i] + "<br />";
+				}
+			}
+			div.innerHTML += s;
+		}
+		
+		// 运算符
+		function calculate(){
+			var div = document.getElementById("op"),
+				inputs = div.getElementsByTagName("input");
+			var a = 5,
+				b = 100 % 7;
+			var sum = a>b && a*b>0;
+			inputs[0].value = sum;
+			inputs[1].value = a;
+			inputs[2].value = b;
+			sum = (++a+23) / (12-b--) *3;
+			inputs[3].value = sum;
+			inputs[4].value = a;
+			inputs[5].value = b;
+		}
+
+		// 筛选姓名
+		function getNames(){
+			var div = document.getElementById("flow"),
+				s = "";
+			var info = "B,男,23,大三;A,女,21,大一;E,女,22,大四;C,男,24,大四;D,女,21,大一;F,男,21,大一;G,女,22,大二";
+				arr1 = info.split(";"),
+				arr2 = [];
+			arr1.sort();
+			for(var i=0; i<arr1.length; i++){
+				arr2.push(arr1[i].split(","));
+			}
+			for(var i=0; i<arr2.length; i++){
+				if(arr2[i][3] === "大一"){
+					if(arr2[i][1] === "女") continue;
+					s += arr2[i] + "<br />";
+				}
+			}
+
+			/*s += "年龄总和：" + arr1.reduce(function(preVal, curVal){
+				curVal = parseInt(curVal.split(",")[2]);
+				return preVal + curVal;
+			}, 0)*/
+			div.innerHTML = s;
+		}
+
+		// 显示时间
+		function showDate(){
+			var div = document.getElementById("date");
+			var d = new Date("2016/1/1 01:02:03"); // 格式："yyyy/MM/dd hh:mm:ss"
+			/* var d = new Date("1 1,2016 1:2:3"); // 格式："MM dd,yyyy hh:mm:ss"
+			var d = new Date(2016,0,2,1,2,3); // 格式：yyyy,MM,dd,hh,mm,ss
+			var d = new Date(1451581323000); // 格式：ms（1970/1/1至今的毫秒数） */
+			var year = d.getFullYear(),
+				mon = padding(d.getMonth() + 1),
+				day = padding(d.getDate()),
+				hour = padding(d.getHours()),
+				min = padding(d.getMinutes()),
+				sec = padding(d.getSeconds());
+			var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+			var s = "现在是 ";
+			s += year + "年" + mon + "月" + day + "日 " + weeks[d.getDay()];
+			s += " " + hour + "时" + min + "分" + sec + "秒";
+			div.innerHTML = s;
+
+			function padding(t){
+				return t < 10 ? "0" + t : t;
+			}
+		}
+	</script>
+</body>
+</html>

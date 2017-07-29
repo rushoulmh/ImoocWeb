@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<title>BOM</title>
+</head>
+<body>
+	<h4>操作成功</h4>
+	<p><span>5</span>秒后回到主页&nbsp;<a href="#" onclick="goBack()">返回</a></p>
+
+	<script type="text/javascript">
+		+function(){
+			// 获取元素
+			var a = document.getElementsByTagName("a")[0],
+				span = document.getElementsByTagName("span")[0];
+			// 通过定时器更改秒数
+			var i = 5;
+			var timer = setInterval(function(){
+				if(i === 1){
+					// 通过window的location对象实现自动跳转
+					location.href = "http://www.imooc.com";
+					// location.assign("http://www.imooc.com");
+				}
+				span.innerHTML = --i;
+			}, 1000);
+
+			function goBack(){
+				clearInterval(timer);
+				// 通过window的history对象实现后退
+				if(history.length > 0){
+					history.back();
+					// history.go(-1);
+				}
+			}
+		}()
+		
+		+function(){
+			var w, h;
+			// 屏幕分辨率尺寸
+			w = screen.width;
+			h = screen.height;
+			console.log("屏幕分辨率的宽高：" + w + "px * " + h + "px");
+			// 屏幕可用尺寸（去掉页面特性，如任务栏）
+			w = screen.availWidth;
+			h = screen.availHeight;
+			console.log("屏幕可用的宽高：" + w + "px * " + h + "px");
+			// 窗口可视区尺寸（不含工具栏和滚动条）
+			w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+			h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+			console.log("浏览器窗口可视区的宽高：" + w + "px * " + h + "px");
+			// 网页内容尺寸
+			w = window.scrollWidth || document.documentElement.scrollWidth || document.body.scrollWidth;
+			h = window.scrollHeight || document.documentElement.scrollHeight || document.body.scrollHeight;
+			console.log("网页实际内容的宽高：" + w + "px * " + h + "px");
+			// 网页内容尺寸（含滚动条、边框等边线，随窗口尺寸改变）
+			w = window.offsetWidth || document.documentElement.offsetWidth || document.body.offsetWidth;
+			h = window.offsetHeight || document.documentElement.offsetHeight || document.body.offsetHeight;
+			console.log("网页内容的宽高：" + w + "px * " + h + "px");
+		}()
+	</script>
+</body>
+</html>

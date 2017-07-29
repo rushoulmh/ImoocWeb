@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<title>显示时间</title>
+</head>
+<body>
+	<div id="show">
+		<p>显示时间：<span id="time"></span></p>
+		<p>倒计时：距离下月一日还有&nbsp;<span id="diff"></span>&nbsp;天</p>
+		<p>秒杀：距离团购开始还剩&nbsp;<span id="kill"></span>&nbsp;</p>
+	</div>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			// 时间格式化
+			function padding(t){
+				return t < 10 ? "0" + t : t;
+				// return ("0"+t).substr(-2);
+			}
+
+			// 显示时间
+			function showTime(){
+				var ele = document.getElementById("time");
+				var d = new Date(),
+					year = d.getFullYear(),
+					mon = d.getMonth() + 1,
+					day = d.getDate(),
+					hour = padding(d.getHours()),
+					min = padding(d.getMinutes()),
+					sec = padding(d.getSeconds());
+				var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+				var s = year + "年" + mon + "月" + day + "日 " + weeks[d.getDay()];
+				s += " " + hour + ":" + min + ":" + sec;
+				ele.innerHTML = s;
+
+				setTimeout(showTime, 1000);
+			}
+			showTime();
+			
+			// 显示倒计时
+			function showDiff(){
+				var ele = document.getElementById("diff");
+				var d = new Date(),
+					end = new Date(d.getFullYear(), d.getMonth()+1, 1);
+				var diff = end.getTime() - d.getTime(),
+					// diff = end - d,
+					days = diff / (1000*60*60*24); // 毫秒转换为天数
+				if(days > 0) ele.innerHTML = Math.ceil(days);
+			}
+			showDiff();
+
+			// 秒杀倒计时
+			function secKill(){
+				var ele = document.getElementById("kill");
+				var d = new Date(),
+					end = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 17, 0, 0);
+				var diff = (end - d) / 1000,
+					sec = Math.floor(diff % 60),
+					min = Math.floor(diff / 60 % 60),
+					hour = Math.floor(diff / (60*60) % 24),
+					day = Math.floor(diff / (60*60*24));
+
+				ele.innerHTML = day + "天" + hour + "时" + min + "分" + sec + "秒";
+				if(diff <= 0){
+					ele.innerHTML = "团购已结束";
+					clearInterval(timer);
+				}
+			}
+			secKill();
+			var timer = setInterval(secKill, 1000);
+		};
+	</script>
+</body>
+</html>

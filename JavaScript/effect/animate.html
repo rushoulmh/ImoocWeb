@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<title>JS简单动画</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			font: 16px "Microsoft Yahei" bold;
+		}
+		/* ul{
+			filter: alpha(opacity:30);
+			opacity: 0.3;
+		} */
+		ul li{
+			display: inline-block;
+			width: 100px;
+			height: 100px;
+			background-color: #f00;
+		}
+		div{
+			position: relative;
+			left: -200px;
+			top: 0;
+			width: 300px;
+			height: 200px;
+			margin-top: 10px;
+			background-color: #f60;
+		}
+		div span{
+			position: absolute;
+			left: 300px;
+			top: 75px;
+			width: 100px;
+			background-color: #ff0;
+		}
+		#div2{
+			left: 300px;
+		}
+		#div2 div{
+			position: absolute;
+			top: 20px;
+			left: 50px;
+			width: 50%;
+			height: 50px;
+			background-color: #eee;
+		}
+		#div2 p{
+			position: absolute;
+			bottom: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<ul id="ul1">
+		<li>多物体1，透明度匀速渐变</li>
+		<li>多物体2，透明度匀速渐变</li>
+		<li>多物体3，透明度匀速渐变</li>
+	</ul>
+	<div id="div1">
+		<span>缓冲+链式+多属性同时运动</span>
+	</div>
+	<div id="div2">
+		<div>纵向滚动一圈</div>
+		<p>减小top值-&gt;设置top为一个较大的固定值-&gt;减小top至原值</p>
+	</div>
+
+	<script type="text/javascript">
+		// 获取最终样式
+		function getStyle(ele, attr){
+			return ele.currentStyle ? ele.currentStyle[attr] : getComputedStyle(ele, false)[attr];
+		}
+
+		window.onload = function(){
+			+function(){
+				var oUL = document.getElementById("ul1"),
+					lis = oUL.getElementsByTagName("li");
+				// 匀速运动（speed）+多物体运动（lis及lis[i].value）
+				var setOpacity = function(ele, target){
+					if(ele.timer) clearInterval(ele.timer);
+					ele.timer = setInterval(function(){
+						var speed = ele.opa > target ? -10 : 10;
+						if(ele.opa == target){
+							clearInterval(ele.timer);
+						} else{
+							ele.opa += speed;
+							ele.style.filter = "alpha(opacity=" + ele.opa + ")";
+							ele.style.opacity = ele.opa / 100;
+						}
+					}, 50);
+				};
+				for(var i=0; i<lis.length; i++){
+					lis[i].opa = 100;
+					lis[i].onmouseover = function(){
+						setOpacity(this, 30);
+					};
+					lis[i].onmouseout = function(){
+						setOpacity(this, 100);
+					};
+				}
+			}()
+
+			+function(){
+				var oDiv1 = document.getElementById("div1"),
+					timer = null;				
+				// 缓冲运动（speed）+链式运动（fn）+多属性同时运动（data={attr:target}）
+				var startMove = function(ele, data, fn){
+					clearInterval(ele.timer);
+					ele.timer = setInterval(function(){
+						var flag = true; // 判断是否所有属性皆已到达目标值
+						for(var attr in data){
+							var val = getStyle(ele, attr);							
+							val = (attr == "opacity") ? Math.round(parseFloat(val) * 100) : parseInt(val); // 处理opacity值
+							var target = data[attr];
+							var speed = (target - val) / 10;							
+							speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed); // 防止speed出现小数点
+							if(val != target) flag = false;
+							val += speed;
+							// 区分opacity或其他非px单位的属性
+							if(attr == "opacity"){
+								ele.style.filter = "filter: alpha(opacity=" + val + ")";
+								ele.style.opacity = val / 100;
+							} else{
+								ele.style[attr] = val + "px";
+							}
+						}
+						if(flag){
+							clearInterval(ele.timer);
+							if(fn) fn();
+						}
+					}, 30);
+				};
+				oDiv1.onmouseover = function(){
+					startMove(this, {"left":0}, function(){
+						// 链式运动，改变left后紧接着同时改变height和width
+						startMove(oDiv1, {"height":300, "width":200});
+					});
+				};
+				oDiv1.onmouseout = function(){
+					startMove(this, {"height":200, "width":300}, function(){
+						// 链式运动，先恢复height和width再恢复left
+						startMove(oDiv1, {"left":-200});
+					});
+				};
+
+				// 案例：纵向滚动一圈
+				var oDiv2 = document.getElementById("div2"),
+					timerIdx = null;
+				oDiv2.onmouseenter = function(){
+					var d = this.getElementsByTagName("div")[0];
+					startMove(d, {"top":-30, "opacity":0}, function(){
+						d.style.top = 100 + "px";
+						startMove(d, {"top":20, "opacity":100});
+					});
+				}
+			}()
+		};
+	</script>
+</body>
+</html>

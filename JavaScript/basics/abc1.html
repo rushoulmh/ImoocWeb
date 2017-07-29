@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<title>JS基础知识1</title>
+	<style type="text/css">
+		body{
+			font-size: 12px;
+		}
+		#txt{
+			width: 600px;
+			height: 400px;
+			padding: 5px;
+			border: 1px solid #333;
+		}
+		p{
+			line-height: 18px;
+			text-indent: 2em;
+		}
+	</style>
+</head>
+<body>
+	<h2 id="con">JavaScript课程</h2>
+	<div id="txt">
+		<h5>JavaScript为网页添加动态效果并实现与用户交互的功能</h5>
+		<p>1. JavaScript入门篇，让不懂JS的你，快速了解JS。</p>
+		<p>2. JavaScript进阶篇，让你掌握JS的基础语法、函数、数组、事件、内置对象、BOM浏览器、DOM操作。</p>
+		<p>3. 学完以上两门基础课后，在深入学习JavaScript的变量作用域、事件、对象、运动、cookie、正则表达式、ajax等课程。</p>
+	</div>
+	<form>
+		<input type="button" value="改变颜色" onclick="changeColor()" />
+		<input type="button" value="改变宽高" onclick="changeSize()" />
+		<input type="button" value="隐藏内容" onclick="hideText()" />
+		<input type="button" value="显示内容" onclick="showText()" />
+		<input type="button" value="取消设置" onclick="resetAll()" />
+	</form>
+	<script type="text/javascript">
+		var divTxt = document.getElementById("txt");
+
+		// 改变颜色
+		function changeColor(){
+			divTxt.style.color = "red";
+			divTxt.style.backgroundColor = "gray";
+		}
+		// 改变宽高
+		function changeSize(){
+			divTxt.style.height = "500px";
+			divTxt.style.width = "200px";
+		}
+		// 隐藏内容
+		function hideText(){
+			divTxt.style.display = "none";
+		}
+		// 显示内容
+		function showText(){
+			divTxt.style.display = "block";
+		}
+		// 取消设置
+		function resetAll(){
+			if(confirm("reset?")){
+				divTxt.removeAttribute("style"); // 移除style属性
+				// divTxt.style.cssText = ""; // 设置内联样式为空
+			}
+		}
+	</script>
+</body>
+</html>

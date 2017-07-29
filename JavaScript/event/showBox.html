@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<title>显示登录窗口</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.hd{
+			padding: 6px 0 0 10px;
+			font-size: 12px;
+		}
+		#box{
+			display: none;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin-left: -150px;
+			margin-top: -75px;
+			width: 300px;
+			height: 150px;
+			border: 1px solid #ccc;
+			background-color: #eee;
+		}
+		#box p{
+			height: 20px;
+			padding: 6px 0 0 5px;
+			border-bottom: 1px solid #ccc;
+			font: 12px "Microsoft Yahei" bold;
+		}
+		#box #close{
+			position: absolute;
+			right: 4px;
+			top: 4px;
+			width: 14px;
+			height: 14px;
+			background: url(close.png) no-repeat;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="hd">您好！<input type="button" value="登 录"></div>
+	<div id="box">
+		<p>用户登录</p>
+		<span id="close">X</span>
+	</div>
+
+	<script type="text/javascript">
+		// 封装添加事件监听程序
+		function addEvent(ele, type, listener){
+			if(ele.addEventListener){
+				ele.addEventListener(type, listener, false);
+			} else if(ele.attachEvent){
+				ele.attachEvent("on"+type, listener);
+			} else{
+				ele["on"+type] = listener;
+			}
+		}
+		
+		window.onload = function(){
+			var btn = document.getElementsByTagName("input")[0],
+				box = document.getElementById("box"),
+				close = document.getElementById("close");
+			// 点击登录按钮显示登录层
+			addEvent(btn, "click", function(){
+				box.style.display = "block";
+			});
+			// 点击关闭按钮隐藏登录层
+			addEvent(close, "click", function(){
+				box.style.display = "none";
+			});
+		}
+	</script>
+</body>
+</html>

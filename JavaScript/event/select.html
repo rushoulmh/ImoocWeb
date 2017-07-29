@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<title>下拉菜单</title>
+	<style>
+		body, ul, li{
+			margin: 0;
+			padding: 0;
+			font-size: 14px;
+		}
+		ul, li{
+			list-style: none;
+		}
+		#sel{
+			position: relative;
+			z-index: 100;
+			width: 186px;
+			margin: 80px auto;
+		}
+		#sel cite{
+			display: block;
+			width: 150px;
+			height: 24px;
+			line-height: 24px;
+			padding-left: 4px;
+			padding-right: 30px;
+			border: 1px solid #333;
+			font-style: normal;
+			color: #807a62;
+			background: url(xjt.png) no-repeat right center;
+			cursor: pointer;
+		}
+		#sel ul{
+			display: none;
+			position: absolute;
+			z-index: 200;
+			width: 184px;
+			margin-top: -1px;
+			border: 1px solid #333;
+			background-color: #fff;
+		}
+		#sel ul li{
+			height: 24px;
+			line-height: 24px;
+		}
+		#sel ul li a{
+			display: block;
+			height: 24px;
+			padding: 0 10px;
+			color: #333;
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<div id="sel">
+		<cite>请选择分类</cite>
+		<ul>
+			<li id="cur"><a href="#" selectid="1">ASP开发</a></li>
+			<li><a href="#" selectid="2">.NET开发</a></li>
+			<li><a href="#" selectid="3">PHP开发</a></li>
+			<li><a href="#" selectid="4">Javascript开发</a></li>
+			<li><a href="#" selectid="5">Java特效</a></li>
+		</ul>
+	</div>
+
+	<script type="text/javascript">
+		// 封装阻止冒泡事件
+		function stopPropagation(e){
+			if(e.stopPropagation){
+				e.stopPropagation();
+			} else{
+				e.cancelBubble = true;
+			}
+		}
+
+		window.onload = function(){
+			var sel = document.getElementById("sel"),
+				cite = sel.getElementsByTagName("cite")[0],
+				ul = sel.getElementsByTagName("ul")[0],
+				links = sel.getElementsByTagName("a"),
+				idx = -1;
+			// 点击cite时
+			cite.onclick = function(e){
+				e = e || window.event;
+				stopPropagation(e);
+				ul.style.display = "block";
+			};
+			// 鼠标滑过、离开、点击每个选项时
+			for(var i=0; i<links.length; i++){
+				links[i].onmouseenter = function(){
+					this.style.backgroundColor = "#eee";
+				};
+				links[i].onmouseout = function(){
+					this.style.backgroundColor = "";
+				};
+				links[i].onclick = function(){
+					cite.innerHTML = this.innerHTML;
+					ul.style.display = "none";
+				};
+			}
+			// 键盘向上、向下、回车时
+			document.onkeyup = function(e){
+				e = e || window.event;
+				stopPropagation(e);
+				var len = links.length;
+				for(var i=0; i<len; i++){
+					links[i].style.backgroundColor = "";
+				}
+				switch(e.keyCode){
+					case 38: // 向上
+						idx--;
+						if(idx < 0) idx = len - 1;
+						links[idx].style.backgroundColor = "#eee";
+						break;
+					case 40: // 向下
+						idx++;
+						if(idx >= len) idx = 0;
+						links[idx].style.backgroundColor = "#eee";
+						break;
+					case 13: // 回车
+						if(idx != -1){
+							links[idx].style.backgroundColor = "";
+							cite.innerHTML = links[idx].innerHTML;
+							ul.style.display = "none";
+							idx = -1;
+						}
+						break;
+				}
+			};
+			// 点击页面空白处时
+			document.onclick = function(){
+				ul.style.display = "none";
+			};
+		}
+	</script>
+</body>
+</html>
