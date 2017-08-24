@@ -27,4 +27,5 @@
   - basics
     - selector：JQ选择器，来自《[jQuery基础 (一)—样式篇](http://www.imooc.com/learn/418)》第2章
     - class+attr：JQ样式与属性，来自《[jQuery基础 (一)—样式篇](http://www.imooc.com/learn/418)》第3章
-    - dom：JQ节点操作，来自《[jQuery基础(二)—DOM篇](http://www.imooc.com/learn/530)》
+    - dom1：JQ节点创建、插入和删除，来自《[jQuery基础(二)—DOM篇](http://www.imooc.com/learn/530)》第2~4章
+    - dom2：JQ节点复制和替换，来自《[jQuery基础(二)—DOM篇](http://www.imooc.com/learn/530)》第5~6章
