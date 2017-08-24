@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery节点遍历、复制和替换</title>
+	<script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+	<style>
+		body {
+			font-size: 14px;
+		}
+		#copy, #replace, #wrap {
+			clear: both;
+			height: 150px;
+		}
+		#copy p {
+			float: left;
+			width: 100px;
+			height: 90px;
+			margin: 5px;
+			padding: 5px;
+			border: 1px solid #ccc;
+			background-color: #bfa;
+		}
+		#replace ul {
+			float: left;
+			width: 150px;
+			height: 100px;
+			margin: 5px 15px;
+			padding: 5px;
+			background-color: #0f0;
+		}
+		#wrap * {
+			width: 100px;
+			margin: 5px;
+			padding: 5px;
+			background-color: #bfa;
+		}
+	</style>
+</head>
+<body>
+	<h2>.clone</h2>
+	<div id="copy">
+		<p class="left">点击触发浅拷贝</p>
+		<p class="right">点击触发深拷贝</p>
+	</div>
+	<script>
+		var l = $("#copy .left");
+		// 浅拷贝：只复制节点，不复制事件
+		l.on("click", function(){
+			var $this = $(this);
+			// .parent返回符合条件的父元素
+			$this.parent().append($this.clone().text("浅拷贝完成").css("color", "#f00"));
+		});
+		// 深拷贝：复制节点和事件
+		l.next().on("click", function(){
+			var $this = $(this);
+			// .closest从自身开始逐级向上查找，返回第一个符合条件的元素
+			$this.closest("div").append($this.clone(true).text("点击可继续深拷贝").css("color", "#00f"));
+		});
+	</script>
+
+	<hr />
+	<h2>.replaceWith和.replaceAll</h2>
+	<div id="replace">
+		<ul class="ul1">
+			<li>replaceWith</li>
+			<li>删除并替换节点（包括其数据和事件）</li>
+			<li>返回替换前的节点</li>
+		</ul>
+		<ul class="ul2">
+			<li>replaceAll</li>
+			<li>删除并替换节点（包括其数据和事件）</li>
+			<li>遍历换色</li>
+		</ul>
+	</div>
+	<script>
+		// .find返回符合条件的后代元素
+		var $ul = $("#replace").find(".ul2");
+		// .replaceWith
+		$ul.prev().on("click", function(){
+			// .children返回符合条件的子元素
+			$(this).children(":eq(1)").replaceWith("<p>替换了</p>");
+		});
+		// .replaceAll
+		$ul.on("click", function(){
+			// .each相当于for循环
+			$("<p>替换了</p>").replaceAll($(this).children()).each(function(i, ele){
+				if(i % 2){
+					// $(this).css("color", "#666");
+					$(ele).text("颜色也换了").css("color", "#f00");
+				}
+			});
+		});
+	</script>
+
+	<hr />
+	<h2>.wrap和.unwrap</h2>
+	<div id="wrap">
+		<button class="btn1">wrap</button>
+		<button class="btn2">unwrap</button>
+		<button class="btn3">wrapAll</button>
+		<button class="btn4">wrapInner</button>
+		<p>p元素</p>
+		<p>p元素内有2个
+			<span>span1</span>
+			<span>span2</span>
+		</p>
+	</div>
+	<script>
+		var w = $("#wrap"), p = w.find("p");
+		// 用div挨个包裹元素p
+		w.find(".btn1").on("click", function(){
+			p.wrap("<div style='border:2px solid #000'></div>");
+			/*p.wrap(function(){
+				return "<div style='border:2px solid #000'></div>";
+			});*/
+		});
+		// 取消每个p上包裹的div元素
+		w.find(".btn2").on("click", function(){
+			p.unwrap();
+		});
+		// 给p元素统一添加一个父元素div
+		w.find(".btn3").on("click", function(){
+			p.wrapAll("<div style='background-color:#ccc'></div>");
+			/*p.wrapAll(function(){
+				return "<div style='background-color:#ccc'></div>";
+			});*/
+		});
+		// 把div#wrap的子节点用div包裹起来
+		w.find(".btn4").on("click", function(){
+			p.wrapInner("<div style='border:2px dotted #00f'></div>");
+			/*p.wrapInner(function(){
+				return "<div style='border:2px dotted #00f'></div>";
+			});*/
+		});
+	</script>
+</body>
+</html>

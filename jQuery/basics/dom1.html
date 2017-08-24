@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery节点创建、插入和删除</title>
+	<script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+	<style>
+		#add, #del {
+			border: 1px solid #000;
+			font-size: 16px;
+		}
+		p {
+			font-size: 14px;
+			background-color: #eee;
+		}
+	</style>
+</head>
+<body>
+	<h2>创建并添加节点</h2>
+	<button id="btn1">点击创建div#add节点</button>
+	<button id="btn2">点击创建div#del节点</button>
+
+	<script>
+		// 添加节点
+		$("#btn1").click(function(){
+			// 创建节点div#add
+			var div1 = $("<div id='add'><button>append和appendTo</button><br />\
+				<button>prepend和prependTo</button><br />\
+				<button>before和insertBefore</button><br />\
+				<button>after和insertAfter</button><br /></div>");
+			$(this).after(div1);
+			// 在div1内追加元素
+			div1.find("button:eq(0)").click(function(){
+				$("<p>appendTo增加的p元素</p>").appendTo(div1);
+				// div1.append("<p>append增加的p元素</p>");
+			});
+			// 在div1内前置元素
+			div1.find("button:eq(1)").click(function(){
+				// $("<p>prependTo增加的p元素</p>").prependTo(div1);
+				div1.prepend("<p>prepend增加的p元素</p>");
+			});
+			// 在div1前插入元素
+			div1.find("button:eq(2)").click(function(){
+				div1.before("<p style='color:#0f0'>before增加的p元素</p>");
+				// $("<p style='color:#00f'>insertBefore增加的p元素</p>").insertBefore(div1);
+			});
+			// 在div1后插入元素
+			div1.find("button:eq(3)").click(function(){
+				// div1.after("<p style='color:#0f0'>after增加的p元素</p>");
+				$("<p style='color:#00f'>insertAfter增加的p元素</p>").insertAfter(div1);
+			});
+		});
+		// 删除节点
+		$("#btn2").click(function(){
+			// 创建节点div#del
+			var div2 = $("<div id='del'><ul><li>li1</li><li>li2</li><li>li3</li><li>li10</li></ul>\
+				<button>remove</button><br />\
+				<button>detach</button><br />\
+				<button>empty</button><br /></div>");
+			$(this).after(div2);
+			var ul = div2.find("ul");
+			// 移除节点及其子节点（包括数据和事件）
+			div2.find("button:eq(0)").click(function(){
+				// ul.find("li:eq(0)").remove();
+				ul.find("li").remove(":contains('1')");
+			});
+			// 移除节点及其子节点，但数据和事件保存在内存中；可用append再次加入文档流
+			div2.find("button:eq(1)").click(function(){
+				var li = ul.find("li:eq(1)").detach();
+			});
+			// 清空节点内容，不删除节点本身
+			div2.find("button:eq(2)").click(function(){
+				ul.empty();
+			});
+		});
+	</script>
+</body>
+</html>

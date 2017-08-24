@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery选择器的使用</title>
+	<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+	<style>
+		#menu{width:300px;border:1px solid red;}
+	</style>
+</head>
+<body>
+	<div id="menu">
+		<div id="menu_f">
+			<h3>女装</h3>
+			<div class="tag1">
+				<dl>
+					<dd>
+						<p>第一类</p>
+						<a>1.衬衫</a>
+						<a>2.T恤</a>
+						<a>3.雪纺衫</a>
+						<a>4.针织衫</a>
+						<a>5.短外套</a>
+						<a>6.卫衣</a>
+						<a>7.小西裤</a>
+						<a>8.风衣</a>
+						<a>9.吊带背心</a>
+						<a>10.连衣裙</a>
+						<a name="setColor">11.蕾丝连衣裙</a>
+						<a>12.复古连衣裙</a>
+						<a>13.印花连衣裙</a>
+						<a>14.真丝连衣裙</a>
+						<a>更多</a>
+					</dd>
+				</dl>
+			</div>
+			<div class="tag2">
+				<dl>
+					<dd>
+						<p>第二类</p>
+						<a>1.背带裤</a>
+						<a>2.哈伦裤</a>
+						<a>3.牛仔裤</a>
+						<a>4.休闲裤</a>
+						<a>5.小脚裤</a>
+						<a>6.西装裤</a>
+						<a>7.打底裤</a>
+						<a>8.阔脚裤</a>
+						<a>9.短裤</a>
+						<a>10.马甲/背心</a>
+						<a>11.羽绒服</a>
+						<a>12.棉服</a>
+						<a>13.夹克</a>
+						<a>14.POLO衫</a>
+						<a>更多</a>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div id="menu_m">
+			<h3>男装</h3>
+			<div class="tag1">
+				<dl>
+					<dd>
+						<p>第一类</p>
+						<a>1.衬衫</a>
+						<a>2.T恤</a>
+						<a>3.牛仔裤</a>
+						<a>4.休闲裤</a>
+						<a>5.短裤</a>
+						<a>6.针织衫</a>
+						<a>7.西服</a>
+						<a>8.西裤</a>
+						<a>9.嘻哈裤</a>
+						<a>10.西服套装</a>
+						<a>11.马甲/背心</a>
+						<a name="setColor">12.羽绒服</a>
+						<a>13.棉服</a>
+						<a>14.夹克</a>
+						<a>更多</a>
+					</dd>
+				</dl>
+			</div>
+			<div class="tag2">
+				<dl>
+					<dd>
+						<p>第二类</p>
+						<a>1.衬衫</a>
+						<a>2.T恤</a>
+						<a>3.牛仔裤</a>
+						<a name='setColor'>4.休闲裤</a>
+						<a>5.短裤</a>
+						<a>6.针织衫</a>
+						<a>7.西服</a>
+						<a>8.西裤</a>
+						<a>9.嘻哈裤</a>
+						<a>10.西服套装</a>
+						<a>11.马甲/背心</a>
+						<a>12.羽绒服</a>
+						<a>13.棉服</a>
+						<a>14.夹克</a>
+						<a>更多</a>
+					</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// 找到男装下第一类衣服中的第一个p元素，并改变颜色
+		$("#menu_m div.tag1 dd>p:first-child").css("color", "#93c");
+		// $("#menu_con .tag1 p:first").css("color", "#93c");
+		
+		// 找到男装下第一类衣服把a元素从顺序1-4加上颜色
+		$("#menu_m>div:first dd:eq(0)>a:lt(4)").css("color", "#f00");
+		// $("#menu_m .tag1 a:lt(4)").css("color", "#f00");
+
+		// 找到男装下所有a元素中属性名name="setColor"的元素，并设置颜色
+		$("#menu_m a[name='setColor']").css("color", "#00f");
+		// $("#menu>div:last a[name='setColor']").css("color", "#00f");
+
+		// 选中第一类衣服中第9个a元素，并改变颜色
+		$("#menu div.tag1 dd a:nth-child(10)").css("color", "#6d0");
+		// $(".tag1 a:nth-child(10)").css("color", "#6d0");
+
+		//找到女装下第一类衣服，把a元素中包含文字"更多"的节点改变颜色
+		$(".tag1:first a:contains('更多')").css("color", "#c75");
+		// $("#menu_f .tag1 a:contains('更多')").css("color", "#c75");
+	</script>
+</body>
+</html>
