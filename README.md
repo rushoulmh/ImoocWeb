@@ -19,8 +19,8 @@
     - QQ：QQ登录面板（鼠标拖拽），来自《[DOM事件探秘](http://www.imooc.com/learn/138)》第4章
     - prizeDraw：抽奖系统（点击和回车），来自《[DOM事件探秘](http://www.imooc.com/learn/138)》第4章
     - select：下拉菜单（鼠标+键盘事件、冒泡），来自《[DOM事件探秘](http://www.imooc.com/learn/138)》第5章
-  - animate
-    - animate: JS动画（匀速、匀加速、多物体、链式），来自《[JS动画效果](http://www.imooc.com/learn/167)》
+  - effect
+    - animate: JS动画（匀速、匀加速、多物体、链式），来自《[JS动画效果](http://www.imooc.com/learn/167)》
     - timer：JS计时器（倒计时），来自《[倒计时效果](http://www.imooc.com/learn/59)》
     - scroll：信息滚动，来自《[信息滚动效果制作](http://www.imooc.com/learn/17)》
 - jQuery
