@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery核心</title>
+	<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+	<style>
+		body {
+			font: 14px arial,sans-serif;
+		}
+		body > div {
+			width: 600px;
+			margin: 10px 5px;
+			border: 2px solid #ccc;
+		}
+		body > div div, body > div p{
+			width: 500px;
+			margin: 2px 0;
+			padding: 2px 0;
+			background-color: #bfa;
+		}
+		ul{
+			font-size: 12px;
+			list-style: none;
+		}
+		ul *{
+			display: inline-block;
+			width: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div id="each">
+		<h3>.each</h3>
+		<div>
+			<p>用法1：jQuery.each(<i>array</i>, function(<i>index</i>, <i>value</i>))</p>
+			<p>用法2：jQuery.each(<i>array</i>|<i>object</i>, function(<i>property</i>, <i>value</i>))</p>
+			<p>用法3：<i>selector</i>.each(<i>object</i>, function(<i>index</i>, <i>element</i>))</p>
+		</div>
+		<select>
+			<option value="1">each数组</option>
+			<option value="2">each对象</option>
+		</select>
+		<button>遍历</button>
+		<p></p>
+	</div>
+	<div id="arr">
+		<h3>.inArray</h3>
+		<div>
+			<p>用法：jQuery.inArray(<i>value</i>, <i>array</i>[, <i>fromIndex</i>]?)</p>
+		</div>		
+		<select>
+			<option value="1">默认查找</option>
+			<option value="2">指定索引开始的位置</option>
+		</select>
+		<button>查找索引值</button>
+		<p></p>
+	</div>
+	<div id="trim">
+		<h3>.trim</h3>
+		<div>
+			<p>用法：jQuery.trim(<i>string</i>)</p>
+		</div>
+		<input type="text" value="	这里有 空白 " />
+		<button>去掉两端空白</button>
+	</div>
+	<div id="get">
+		<h3>.get</h3>
+		<div>
+			<p>用法：get(<i>index</i>)</p>
+		</div>
+		<div class="lnk">
+			<a href="#">001</a>
+			<a href="#">002</a>
+			<a href="#">003</a>
+			<a href="#">004</a>
+			<a href="#">005</a>
+		</div>
+		<select>
+			<option value="1">正向索引</option>
+			<option value="2">负向索引</option>
+		</select>
+		<button>获取元素</button>
+	</div>
+	<div id="idx">
+		<h3>.index</h3>
+		<div>
+			<p>用法：index([<i>selector</i> | <i>element</i>]?)</p>
+		</div>
+		<ul>
+			<a href="#">a001</a>
+			<li>li01</li>
+			<li>li02</li>
+			<li id="li3">li03</li>
+		</ul>
+		<ul>
+			<li>li04</li>
+			<li id="li5">li05</li>
+			<li>li06</li>
+		</ul>
+		<select>
+			<option value="1">无参数</option>
+			<option value="2">传递DOM</option>
+			<option value="3">传递JQ对象</option>
+			<option value="4">传递选择器字符串</option>
+		</select>
+		<button>获取索引</button>
+		<p></p>
+	</div>
+
+	<script>
+		var div1 = $("#each"),
+			div2 = $("#arr"),
+			div3 = $("#trim"),
+			div4 = $("#get"),
+			div5 = $("#idx");
+
+		// .each
+		div1.find("button").click(function(){
+			var p = div1.find("p:last"),
+				val = div1.find("select").val();
+			p.empty();
+
+			switch(val){
+				case "1": // 遍历数组
+					$.each(["each", "array"], function(i, item){
+						p.append("索引=" + i + "，元素=" + item + "；<br />");
+					});
+					break;
+				case "2": // 遍历对象
+					$.each({
+						name: "each",
+						descrip: "相当于for循环"
+					}, function(prop, val){
+						p.append("属性名=" + prop + "，属性值=" + val + "；<br />");
+					});
+					break;
+			}
+		});
+
+		// .inArray
+		div2.find("button").click(function(){
+			var p = div2.find("p:last"),
+				val = div2.find("select").val(),
+				idx = 0;
+			p.empty();
+
+			switch(val){
+				case "1": // 默认从索引0开始查找
+					idx = $.inArray("a", ["a", "b", "c", "d"]);
+					p.text("'a'在数组['a', 'b', 'c', 'd']中的索引是 " + idx);
+					break;
+				case "2": // 从指定索引位置开始查找
+					idx = $.inArray("a", ["a", "b", "c", "a", "o"], 2);
+					p.text("'a'在数组['a', 'b', 'c', 'a', 'o']中的索引是 " + idx);
+					break;
+			}
+		});
+
+		// .trim
+		div3.find("button").click(function(){
+			var input = div3.find("input");
+			input.val($.trim(input.val()));
+		});
+
+		// .get
+		div4.find("button").click(function(){
+			var as = div4.find(".lnk a"),
+				val = div4.find("select").val();
+
+			switch(val){
+				case "1": // 正向查找
+					as.get(1).style.color = "#f00";
+					break;
+				case "2": // 反向查找
+					as.get(-1).style.color = "#ff0";
+					break;
+			}
+		});
+
+		// .index
+		div5.find("button").click(function(){
+			var p = div5.find("p:last"),
+				val = div5.find("select").val(),
+				lis = $("li");
+			p.empty();
+
+			switch(val){
+				case "1": // 无参数，返回lis中首个元素相对于其兄弟元素的索引位置
+					p.text("li集合中首个元素的索引位置：" + lis.index());
+					break;
+				case "2": // 传入DOM元素，返回li3相对于lis的索引位置
+					var li3 = document.getElementById("li3");
+					p.text("li03相对于li集合的索引位置：" + lis.index(li3));
+					break;
+				case "3": // 传入JQ对象，返回li5相对于lis的索引位置
+					var li5 = $("#li5");
+					p.text("li05相对于li集合的索引位置：" + lis.index(li5));
+					break;
+				case "4": // 传入选择器字符串，返回items相对于lis的索引位置
+					var items = $("li:gt(2)");
+					p.text("$('li:gt(2)')相对于li集合的索引位置：" + items.index("li"));
+					break;
+			}
+		});
+	</script>
+</body>
+</html>
