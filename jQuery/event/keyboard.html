@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery键盘事件</title>
+	<script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+	<style>
+		#main {
+			font-size: 14px;
+			font: 14px arial, "Microsoft Yahei", sans-serif;
+		}
+		#main p {
+			width: 400px;
+			height: 50px;
+			margin: 5px;
+			padding: 5px;
+			background-color: #bfa;
+		}
+		h3 {
+			margin: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<h3>.keydown, .keyup, .keypress</h3>
+		<p>用法：keypress([<i>data</i>,]? function(<i>event</i>?))</p>
+		<p>keyup、keydown用法同keypress，但keypress只能捕获单个ANSI字符；
+		keydown和keypress只能捕获上次输入的值。</p>
+		<input type="text" />
+	</div>
+
+	<script>
+		var ipt = $("#main input");
+
+		// 键盘键按下
+		ipt.keydown(function(e){
+			console.log("keydown键值：" + e.which);
+		});
+		// 键盘键弹起
+		ipt.keyup(function(e){
+			console.log("keyup输入：" + e.target.value);
+		});
+		// 键盘键敲击
+		ipt.keypress(function(e){
+			console.log("keypress键值：" + e.which);
+		});
+	</script>
+</body>
+</html>
