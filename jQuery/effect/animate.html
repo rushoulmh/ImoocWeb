@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery自定义动画</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font: 16px "Microsoft Yahei" bold;
+        }
+        #move{
+            position: relative;
+            left: 50px;
+            top: 100px;
+            width: 300px;
+            height: 200px;
+            background-color: #f60;
+        }
+        #move div{
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            width: 50%;
+            height: 50px;
+            background-color: #eee;
+        }
+        #move p{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        }
+
+        #div2 {
+            position: absolute;
+            top: 100px;
+            left: 500px;
+        }
+        #div2 div {
+            width: 200px;
+            height: 100px;
+            background-color: #0ff;
+            color: #f00;
+        }
+        #div2 a {
+            display: block;
+        }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="move">
+        <div>纵向滚动一圈</div>
+        <p>使用jQuery实现</p>
+    </div>
+    <div id="div2">
+        <div id="container">内部动画</div>
+        <select name="anim" id="anim">
+            <option value="1">step动画</option>
+            <option value="2">progress回调</option>
+        </select>
+        <input id="exec" type="button" value="执行动画" />
+        <button id="stop">停止动画</button>
+    </div>
+
+    <script type="text/javascript">
+        $(function(){
+            // 向上滚动一圈
+            $("#move").mouseenter(function(){
+                $(this).find("div").animate({top:"-30px", opacity:"0"}, 300, function(){
+                    $(this).css({top:"100px"});
+                    $(this).animate({top:"20px", opacity:"1"}, 300);
+                });
+            });
+            // 内部动画
+            $("#exec").click(function() {
+                var val = $("#anim").val(),
+                    $contain = $("#container");
+                switch(val) {
+                    case "1":
+                        $contain.animate({
+                            height: 50
+                        }, {
+                            duration: 2000,
+                            step: function(now, fx) {
+                                $contain.text("高度的改变值：" + now);
+                                /*var data = fx.elem.id + " " + fx.prop + ": " + now;
+                                console.log(data);*/
+                            }
+                        });
+                        break;
+                    case "2":
+                        $contain.animate({
+                            height: 50
+                        }, {
+                            duration: 2000,
+                            progress: function(now) {
+                                $contain.text("进度：" + arguments[1]);
+                            },
+                            complete: function() {
+                                alert("complete");
+                            }
+                        });
+                        break;
+                }
+            });
+
+            // 停止动画
+            $("#stop").click(function(){
+                // $("#container").stop(); // 暂停当前动画
+                // $("#container").stop(true); // 暂停所有动画队列
+                $("#container").stop(true, true); // 停止动画并跳至动画的结束
+            });
+        })
+    </script>
+</body>
+</html>

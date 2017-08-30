@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>淡入淡出</title>
+    <style>
+        body{
+            font: 14px/1.5 arial,"Microsoft Yahei",sans-serif;
+        }
+        div{
+            margin: 10px 5px;
+        }
+        p{
+            width: 500px;
+            height: 100px;
+            background-color: #bfa;
+        }
+    </style>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="div3">
+        <h3>.fadeIn，.fadeOut和.fadeToggle</h3>
+        <p class="p1">用法1：fadeToggle(<i>duration</i>?[, <i>easing</i>]?[, <i>complete</i>]?)<br />
+        用法2：fadeToggle(<i>options</i>?)<br />
+        fadeOut、fadeIn用法同fadeToggle</p>
+        <button>fadeOut-fadeIn</button>
+        <button>fadeToggle</button>
+
+        <h3>.fadeTo</h3>
+        <p class="p2">用法：fadeTo(<i>duration</i>, <i>opacity</i>[, <i>easing</i>]?[, <i>callback</i>]?)</p>
+        <button>fadeTo</button>
+    </div>
+
+    <script type="text/javascript">
+        $(function(){
+            var div3 = $("#div3"), p1 = div3.find(".p1"), p2 = div3.find(".p2");
+            // 淡入和淡出
+            div3.find("button:first").click(function(){
+                p1.fadeOut(1000).fadeIn(1000, "linear", function(){
+                    alert("执行完毕");
+                });
+            });
+            // 切换fadeOut和fadeIn
+            div3.find("button:eq(1)").click(function(){
+                p1.fadeToggle();
+            });
+            // 淡入淡出到指定透明度
+            div3.find("button:last").click(function(){
+                p2.fadeTo(1000, 0.2).fadeTo("slow", 0.8);
+            });
+        })
+    </script>
+</body>
+</html>
