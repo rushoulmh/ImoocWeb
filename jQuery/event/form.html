@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery表单事件</title>
+	<script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+	<style>
+		#main {
+			font-size: 14px;
+			font: 14px arial, "Microsoft Yahei", sans-serif;
+		}
+		#main > div, #main > p {
+			width: 400px;
+			height: 50px;
+			margin: 5px;
+			padding: 5px;
+			background-color: #bfa;
+		}
+		h3 {
+			margin: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<h3>.focusin, .focusout, .focus, .blur</h3>
+		<p>用法：focus([<i>data</i>,]? function(<i>event</i>?))<br />
+			focusin、focusout、blur用法同focus，但focus和blur不冒泡</p>
+		<div class="div1">
+			<input type="text" value="点击这里" />
+			<p></p>
+		</div>
+
+		<h3>.change和.select</h3>
+		<p>用法：change([<i>data</i>,]? function(<i>event</i>?))</p>
+		<p>当select/input/textarea值改变时，触发change事件；<br />
+		当input/textarea的文本被选中时，触发select事件</p>
+		<div class="div2">
+			<textarea cols="30" rows="1">选中我</textarea>
+			<p></p>
+		</div>
+
+		<h3>.submit</h3>
+		<p>用法：submit([<i>data</i>,]? function(<i>event</i>?))</p>
+		<p>表单提交时，触发submit事件</p>
+		<form action="">
+			<input type="text" value="点击我后敲击回车" />
+			<button type="submit">提交</button>
+		</form>		
+	</div>
+
+	<script>
+		var mn = $("#main"),
+			div1 = mn.find(".div1"),
+			ipt = div1.find("input"),
+			txt = mn.find(".div2 textarea");
+
+		// 获得焦点
+		div1.focusin("focusin", function(e){
+			ipt.next().text("input元素的" + e.data + "事件冒泡，被父元素捕获");
+		});
+		ipt.focus(function(){
+			$(this).css("border", "2px solid #f00").val("触发input的focus事件");
+		});
+		// 失去焦点
+		div1.focusout("focusout", function(e){
+			ipt.next().text("父元素捕获了input元素的" + e.data + "事件");
+		});
+		ipt.blur(function(){
+			$(this).removeAttr("style").val("触发input的blur事件");
+		});
+
+		// textarea的值改变，触发change事件
+		txt.change(function(e){
+			$(this).next().text("修改后的文本：" + e.target.value);
+		});
+		// textarea的文本被选中，触发select事件
+		txt.select(function(e){
+			$(this).next().text("选中文本：" + e.target.value);
+		});
+
+		// 表单提交事件
+		mn.find("form").submit(function(){
+			$(this).prev().text("input[type='submit']、input[type='image']、button[type='submit']以及某些表单获得焦点时敲击回车，即触发submit事件");
+			return false; // 阻止浏览器默认提交事件
+		});
+	</script>
+</body>
+</html>

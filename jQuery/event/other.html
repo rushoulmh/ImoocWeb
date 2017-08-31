@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery事件绑定和自定义事件</title>
+	<script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+	<style>
+		#main {
+			font: 14px arial, "Microsoft Yahei", sans-serif;
+		}
+		h3 {
+			margin: 10px;
+		}
+		p {
+			width: 400px;
+			height: 50px;
+			margin: 5px;
+			padding: 5px;
+			background-color: #bfa;
+		}
+		.on {
+			width: 500px;
+			border: 1px solid #ccc;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<h3>事件对象Event</h3>
+		<ul>
+			<li><i>event</i>.pageX和event.pageY：鼠标当前相对于页面的坐标</li>
+			<li><i>event</i>.which：鼠标或键盘的键值</li>
+			<li><i>event</i>.type：事件类型</li>
+			<li><i>event</i>.currentTarget：处理事件的DOM元素，相当于this</li>
+			<li><i>event</i>.target：触发事件的DOM元素</li>
+			<li><i>event</i>.preventDefault()：阻止默认行为</li>
+			<li><i>event</i>.stopPropagation()：阻止事件冒泡</li>
+		</ul>
+
+		<h3>.on和.off</h3>
+		<p>用法：on(<i>events</i>[, <i>selector</i>]?[, <i>data</i>]?, function(<i>event</i>?))<br />
+			用法：off(<i>events</i>?[, <i>selector</i>]?[, <i>function</i>]?)</p>
+		<div class="on">
+			为div绑定mousedown事件，div内部元素的mousedown事件会一直冒泡到div上
+			<p>绑定mouseenter和mouseleave事件（不冒泡）
+				<a href="#">委托click事件</a></p>
+			<input type="text" value="绑定focus和blur事件" />
+			<button>点击移除事件</button>
+		</div>
+
+		<h3>.trigger和.triggerHandler</h3>
+		<p>用法：trigger(<i>events</i>[, <i>paraArray</i>]?)<br />
+			triggerHandler用法同trigger</p>
+		<div class="trg">
+			<button>trigger</button>
+			<button>triggerHandler</button>
+			<input type="text" />
+		</div>
+	</div>
+
+	<script>
+		var d1 = $("#main .on");
+		// 绑定事件
+		d1.on("mousedown", function(e){
+			console.log("触发事件：" + e.type + 
+				"，  触发事件的元素：" + e.target.nodeName + 
+				"，  处理事件的元素：" + e.currentTarget.nodeName);
+		});
+		d1.find("p").on("mouseenter mouseleave", function(e){
+			console.log("触发事件：" + e.type + 
+				"，  触发事件的元素：" + e.target.nodeName + 
+				"，  处理事件的元素：" + e.currentTarget.nodeName);
+		});
+		d1.find("input").on({
+			focus: function(e){
+				console.log("触发事件：" + e.type + 
+					"，  触发事件的元素：" + e.target.nodeName + 
+					"，  处理事件的元素：" + e.currentTarget.nodeName);
+			},
+			blur: function(e){
+				console.log("触发事件：" + e.type + 
+					"，  触发事件的元素：" + e.target.nodeName + 
+					"，  处理事件的元素：" + e.currentTarget.nodeName);
+			}
+		});
+		d1.on("click", "p", function(e){
+			console.log("触发事件：" + e.type + 
+				"，  触发事件的元素：" + e.target.nodeName + 
+				"，  处理事件的元素：" + e.currentTarget.nodeName);
+		});
+		// 解绑事件
+		d1.find("button").click(function(){
+			d1.find("p").off("mouseenter mouseleave");
+			alert("mouseenter和mouseleave事件已移除");
+			// d.off(); // 移除div.eve的所有事件
+		});
+
+		// 自定义事件
+		var d2 = $("#main .trg"), ipt = d2.find("input");
+		ipt.on("focus", function(e, tt){
+			$(this).val(tt);
+		});
+		d2.find("button:first").click(function(){
+			ipt.trigger("focus", "trigger");
+			// return false; // 阻止冒泡
+		});
+		d2.find("button:last").click(function(e){
+			ipt.triggerHandler("focus", "不触发默认聚焦事件");
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery鼠标事件</title>
+	<script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+	<style>
+		h3 {
+			margin: 10px;
+		}
+		p {
+			width: 400px;
+			height: 50px;
+			margin: 5px;
+			padding: 5px;
+			background-color: #bfa;
+		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<h3>.click, .dblclick, .mousedown, .mouseup</h3>
+		<p>用法：click([<i>data</i>,]? function(<i>event</i>?))<br />
+			dblclick、mousedown、mouseup用法同click</p>
+		<button>鼠标键点击</button>
+
+		<h3>.mousemove, .mouseover, .mouseenter, .mouseleave, .mouseout, .hover</h3>
+		<p>用法：mousemove([<i>data</i>,]? function(<i>event</i>?))<br />
+			用法：hover(<i>mouseenter</i>, <i>mouseleave</i>)</p>
+		<p>mouseover、mouseenter、mouseleave、mouseout用法同mousemove</p>
+	</div>
+
+	<script>
+		var div = $("#main"),
+			btn = div.find("button"),
+			p = div.find("p:last");
+
+		// 鼠标左键单击click
+		btn.click(111, function(e){
+			console.log("click传入的数据是" + e.data); /// e.data => 111
+		});
+		// 鼠标键按下
+		btn.mousedown(function(e){
+			var msg = "";
+			switch(e.which){
+				case 0:
+					msg = "左键";
+					break;
+				case 1:
+					msg = "中键";
+					break;
+				case 2:
+					msg = "右键";
+					break;
+			}
+			console.log("mousedown按下的键是" + msg);
+		});
+		// 鼠标键弹起
+		btn.mouseup(function(){
+			console.log("mouseup已释放鼠标键");
+		});
+
+		// 鼠标移动
+		p.mousemove(function(e){
+			console.log("mousemove移动的X位置：" + e.pageX);
+		});
+		// 鼠标移入元素
+		p.mouseover(function(){
+			console.log("mouseover");
+		});
+		p.mouseenter(function(){
+			console.log("mouseenter");
+		});
+		// 鼠标移出元素
+		p.mouseleave(function(){
+			console.log("mouseleave");
+		});
+		p.mouseout(function(){
+			console.log("mouseout");
+		});
+		// 鼠标经过
+		p.hover(function(){
+			$(this).css("background-color", "#00f");
+		}, function(){
+			$(this).css("background-color", "#bfa");
+		});
+	</script>
+</body>
+</html>
