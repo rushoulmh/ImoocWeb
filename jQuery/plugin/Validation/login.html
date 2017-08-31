@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Validation插件</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <form action="" id="login">
+        <fieldset>
+            <legend>用户登录</legend>
+            <p>
+                <label for="uid">用户名：</label>
+                <input type="text" name="uid" id="uid" />
+            </p>
+            <p>
+                <label for="pwd">密码：</label>
+                <input type="password" name="pwd" id="pwd" />
+            </p>
+            <p>
+                <label for="confirm-pwd">确认密码：</label>
+                <input type="password" name="confirm-pwd" id="confirm-pwd" />
+            </p>
+            <p>
+                <button type="submit">登录</button>
+                <button id="check">检查表单</button>
+                <button id="reset">重置表单</button>
+            </p>
+        </fieldset>
+        <p id="info"></p>
+    </form>
+
+    <script src="vendor/jquery-1.10.0.js"></script>
+    <script src="vendor/jquery.validate-1.13.1.js"></script>
+    <script>
+        var validor; // 写在外面方便在控制台调用
+        $(document).ready(function(){
+            var frm = $("#login");
+            validor = frm.validate({
+                // 进入调试模式（只验证不提交）
+                debug: true,
+                // 校验规则
+                rules: {
+                    uid: {
+                        required: true,
+                        rangelength: {
+                            param: [2, 10],
+                            depends: function(ele){
+                                // 规定只有填写了password，才验证用户名长度
+                                return $("#pwd").is(":filled");
+                            }
+                        }
+                    },
+                    pwd: {
+                        required: true, // 必填
+                        rangelength: [2, 16]
+                    },
+                    "confirm-pwd": {
+                        equalTo: "#pwd" // 要求与pwd的值相同
+                    }
+                },
+                // 提示信息
+                messages: {
+                    uid: {
+                        required: "请输入用户名",
+                        rangelength: "用户名为2~10个字符",
+                        remote: "用户名不存在"
+                    },
+                    pwd: {
+                        required: "请输入密码",
+                        rangelength: "密码为2~16个字符"
+                    },
+                    "confirm-pwd": {
+                        equalTo: "两次输入密码不一致"
+                    }
+                },
+                // 给未通过验证的表单元素添加效果
+                highlight: function(ele, errCls, validCls){
+                    $(ele).addClass(errCls).removeClass(validCls);
+                    $(ele).fadeOut().fadeIn();
+                },
+                // 为未通过验证的表单元素删除效果
+                unhighlight: function(ele, errCls, validCls){
+                    $(ele).removeClass(errCls).addClass(validCls);
+                },
+                // form通过验证后运行的函数
+                submitHandler: function(frm){
+                    console.log($(frm).serialize());
+                },
+                /*// groups + errorPlacement给一组元素用一个错误提示
+                groups: {
+                    login: "uid pwd confirm-pwd" // 元素分组
+                },
+                errorPlacement: function(err, ele){
+                    err.appendTo("#info"); // 指定错误信息存放处
+                }*/
+                // 规定指定元素在有错误时显示
+                errorContainer: "#info",
+                // 指定错误提示的统一存放处
+                errorLabelContainer: "#info"
+                /*// 规定用何种标签标记错误，默认为label
+                errorElement: "li",
+                // 规定用何种标签将errorElement包裹起来
+                wrapper: "ul"*/
+            });
+
+            // 自定义验证方法
+            $.validator.addMethod("postcode", function(val, ele, params){
+                var rgx = /^\d{6}$/;
+                // 填写值时验证，未填时返回true
+                return this.optional(ele) || rgx.text(val);
+            }, "请填写正确的邮编！");
+
+            // 检查form是否通过验证
+            frm.find("#check").click(function(){
+                console.log(frm.valid() ? "填写正确" : "填写错误");
+                return false;
+            });
+            
+            // 获取错误数量
+            frm.on("valid-form", function(e, v){
+                console.log("错误数：" + v.numberOfInvalids());
+            });
+        })
+    </script>
+</body>
+</html>
