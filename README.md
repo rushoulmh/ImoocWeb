@@ -40,3 +40,5 @@
     - slide：上卷和下拉，来自《[jQuery基础(四)—动画篇](http://www.imooc.com/learn/430)》第2章
     - fade：淡入和淡出，来自《[jQuery基础(四)—动画篇](http://www.imooc.com/learn/430)》第3章
     - animate：自定义动画，来自《[jQuery基础(四)—动画篇](http://www.imooc.com/learn/430)》第5章
+  - plugin
+    - Validation：Validation插件，来自《[jQuery插件——Validation Plugin](http://www.imooc.com/learn/385)》
