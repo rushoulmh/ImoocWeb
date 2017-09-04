@@ -42,3 +42,5 @@
     - animate：自定义动画，来自《[jQuery基础(四)—动画篇](http://www.imooc.com/learn/430)》第5章
   - plugin
     - Validation：Validation插件，来自《[jQuery插件——Validation Plugin](http://www.imooc.com/learn/385)》
+- Exercise
+  - menubar：仿京东导航菜单（CSS版和JS版），来自《[商城分类导航效果](http://www.imooc.com/learn/174)》
