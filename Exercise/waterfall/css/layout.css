@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#container {
+    position: relative;
+    /*margin: 0 auto;*/
+}
+/* #container:after {
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    content: "";
+} */
+
+.g-box {
+    float: left;
+    padding: 10px 0 0 15px;
+}
+.m-pic {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 5px #ccc;
+            box-shadow: 0 0 5px #ccc;
+}
+.m-pic img {
+    width: 165px;
+    height: auto;
+}

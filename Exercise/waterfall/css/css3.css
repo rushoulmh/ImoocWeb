@@ -1,0 +1,32 @@
+/**
+ * 多栏布局
+ */
+#container {
+    -webkit-column-width: 202px;
+       -moz-column-width: 202px;
+        -ms-column-width: 202px;
+         -o-column-width: 202px;
+            column-width: 202px;
+    /* -webkit-column-count: 6;
+       -moz-column-count: 6;
+        -ms-column-count: 6;
+         -o-column-count: 6;
+            column-count: 6; */
+    /* -webkit-column-rule: 2px dashed #f00;
+       -moz-column-rule: 2px dashed #f00;
+        -ms-column-rule: 2px dashed #f00;
+         -o-column-rule: 2px dashed #f00;
+            column-rule: 2px dashed #f00; */
+    /* -webkit-column-gap: 5px;
+       -moz-column-gap: 5px;
+        -ms-column-gap: 5px;
+         -o-column-gap: 5px;
+            column-gap: 5px; */
+}
+
+/* .m-pic {
+    width: 165px;
+}
+.m-pic {
+    display: block;
+} */
