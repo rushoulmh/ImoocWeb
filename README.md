@@ -44,3 +44,5 @@
     - Validation：Validation插件，来自《[jQuery插件——Validation Plugin](http://www.imooc.com/learn/385)》
 - Exercise
   - menubar：仿京东导航菜单（CSS版和JS版），来自《[商城分类导航效果](http://www.imooc.com/learn/174)》
+  - navPage：定位导航（JS版和JQ版），来自《[网页定位导航特效](http://www.imooc.com/learn/56)》
+  - waterfall：瀑布流布局（CSS版、JS版和JQ版），来自《[瀑布流布局](http://www.imooc.com/learn/101)》
