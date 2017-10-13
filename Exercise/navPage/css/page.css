@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font: 12px/1.5 "Microsoft Yahei";
+}
+li {
+    list-style: none;
+}
+
+/* 右侧导航菜单 */
+#nav {
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    margin-left: 400px;
+}
+#nav ul li a {
+    display: block;
+    margin: 2px 0;
+    width: 80px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+#nav ul li a:hover,
+#nav ul li a.z-cur {
+    color: #fff;
+    background-color: #08b;
+}
+/* hack for ie6 */
+*html, *html body {
+    background-image: url(about:blank);
+    background-attachment: fixed;
+}
+*html #nav {
+    position: absolute;
+    /*top: expression((((e=document.documentElement.scrollTop) ? e : document.body.scrollTop) + 100) + "px");*/
+    top: expression(((e = document.documentElement.scrollTop || document.body.scrollTop) + 100) + "px");
+    bottom: auto;
+}
+
+/* 左侧内容区 */
+#main {
+    margin: 0 auto;
+    padding: 20px;
+    width: 800px;
+}
+#main h1 {
+    color: #08b;
+}
+.m-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px dotted #08b;
+}
+.m-item h2 {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #08b;
+}
+.m-item li {
+    display: inline-block;
+    margin-right: 10px;
+}
+.m-item li img {
+    width: 230px;
+    height: 230px;
+    /* border: none; */
+}
