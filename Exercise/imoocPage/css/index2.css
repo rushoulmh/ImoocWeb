@@ -1,0 +1,185 @@
+/* reset */
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Microsoft Yahei";
+}
+ul{
+    list-style-type: none;
+}
+/* 布局 */
+.g-hd, .g-ft{
+    width: 100%;
+    height: 70px;
+}
+.g-bd{
+    width: 1000px;
+    margin: 5px auto;
+}
+.g-box{
+    margin-left: -2px;
+}
+.g-b20{
+    width: 100%;
+    height: 20px;
+}
+.wrap{
+    float: left;
+    width: 330px;
+    margin-left: 2px;
+    border: 1px solid #eee;
+    font-size: 0; /* 去除换行造成的空隙 */
+}
+/* 组件 */
+.u-logo{
+    float: left;
+    margin-left: 20px;
+}
+.u-tt{
+    height: 35px;
+    padding-left: 20px;
+    font: normal 14px/35px "Microsoft Yahei";
+    color: #fff;
+    background-color: #cc1b1b;
+}
+/* 状态 */
+.z-crt{
+    background-color: #cc1b1b;
+}
+/* 功能 */
+.f-cb{
+    clear: both;
+}
+.clearfix:after{
+    display: block;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    content: "";
+}
+*html .clearfix{
+    zoom: 1;
+} 
+
+/* 头部 */
+/* 导航区 */
+.m-nav{
+    /*float: left;*/
+    width: 1000px;
+    height: 70px;
+    margin: 0 auto;
+}
+.m-nav li{
+    float: left;
+    width: 100px;
+    text-align: center;
+}
+.m-nav a{
+    display: block;
+    padding: 0 5px;
+    line-height: 70px;
+    text-decoration: none;
+    color: #000;
+}
+.m-nav a:hover, .m-nav a:active{
+    background-color: #cc1b1b;
+}
+
+/* 主体 */
+/* 焦点图 */
+#slidebox{
+    width: 100%;
+    height: 310px;
+    overflow: hidden;
+}
+
+/* 滚动新闻区 */
+.m-scrollnews{
+    width: 100%;
+    height: 35px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #333;
+}
+.m-scrollnews h3, .m-scrollnews p{
+    float: left;
+    padding: 0 20px;
+}
+.m-scrollnews h3{
+    width: 100px;
+    text-align: center;
+}
+.m-scrollnews p{
+    width: 820px;
+    line-height: 35px;
+}
+
+/* 广告区 */
+.m-ad p{
+    font-size: 16px;
+    text-align: center;
+}
+
+/* 内容区 */
+.m-news, .m-act, .m-contact{
+    height: 320px;
+    border: 1px solid #eee;
+    font-size: 14px;
+}
+/* 新闻中心 */
+.m-news .news-lst li{
+    height: 80px;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+    font-size: 12px;
+}
+.m-news .news-img{
+    float: left;
+    width: 30px;
+    height: 40px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #cc1b1b;
+}
+.m-news .news-txt{
+    float: left;
+    width: 250px;
+    margin-left: 10px;
+}
+.m-news .news-txt h4{
+    height: 35px;
+    line-height: 35px;
+}
+.m-news .news-txt p{
+    height: 35px;
+    overflow: hidden;
+}
+/* 热门活动 */
+.m-act .act-cnt{
+    padding: 20px;
+}
+.m-act .act-cnt li a{
+    text-decoration: none;
+    color: #000;
+}
+.m-act .act-cnt li a:hover{
+    color: #009cdf;
+}
+/* 联系我们 */
+.m-contact .contact-cnt{
+    padding: 5px;
+}
+
+/* 底部 */
+/* 版权区 */
+.m-cprt{
+    width: 1000px;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #ccc;
+}

@@ -1,0 +1,82 @@
+/* 轮播图 */
+#slidebox{
+    height: 243px;
+}
+
+/* 新闻展示区 */
+.g-mn{
+    min-height: 350px;
+    _height: 350px; /* IE6 hack */
+    margin-top: 10px;
+    background-color: #fff;
+}
+/* 左侧菜单区 */
+.m-mnu{
+    float: left;
+    width: 220px;
+    height: 350px;
+    border: 1px solid #e8e8e8;
+}
+.m-mnu h2{
+    height: 35px;
+    padding-left: 20px;
+    font: bold 14px/35px "Microsoft Yahei";
+    color: #666;
+    background: url(../imgs/title_bg.gif) repeat-x;
+}
+.m-mnu ul{
+    height: 365px;
+    background: url(../imgs/content_bg.gif) repeat-x;
+}
+.m-mnu li{
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    list-style-position: inside;
+    list-style-image: url(../imgs/li_bg.gif);
+    cursor: pointer;
+}
+.m-mnu li:hover{
+    list-style-image: url(../imgs/li_bg2.gif);
+    background-color: #f2f2f2;
+}
+.m-mnu li a{
+    text-decoration: none;
+    color: #666;
+}
+.m-mnu li a:hover{
+    text-decoration: none;
+    color: #009cdf;
+}
+/* 右侧内容区 */
+.m-cnt{
+    float: right;
+    width: 770px;
+    min-height: 350px;
+    _height: 350px; /* IE6 hack */
+    border: 1px solid #e8e8e8;
+    background-color: #fff;
+}
+.m-cnt h2{
+    height: 35px;
+    padding-left: 20px;
+    font: bold 14px/35px "Microsoft Yahei";
+    color: #666;
+    background: url(../imgs/type_bg.png) repeat-x;
+}
+.m-cnt h1{
+    margin: 10px 0;
+    font: 20px "Microsoft Yahei";
+    text-align: center;
+}
+.m-cnt .news-info{
+    border-bottom: 1px dotted #666;
+    text-align: center;
+    color: #666;
+}
+.m-cnt .context{
+    padding: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    text-indent: 2em;
+}

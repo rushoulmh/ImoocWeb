@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Imooc新闻列表页</title>
+    <link rel="stylesheet" href="css/master.css">
+    <link rel="stylesheet" href="css/news.css">
+</head>
+<body>
+    <!-- 头部 -->
+    <div id="header" class="g-hd">
+        <!-- 链接区 -->
+        <ul class="m-links">
+            <li><a href="#">联系我们</a></li>
+            <li><a href="#" onclick="AddFavorite(window.location, document.title)">加入收藏</a></li>
+            <li><a href="#" onclick="SetHome(window.location)">设为首页</a></li>
+        </ul>
+    </div>
+    <!-- 主体 -->
+    <div id="container" class="g-bd">
+        <!-- logo区 -->
+        <div class="m-logo clearfix">
+            <img class="logo-left" src="imgs/logo.jpg" alt="慕课网" />
+            <div class="logo-right">
+                <img src="imgs/tel.jpg" width="28" height="28" alt="服务热线" />
+                24小时服务热线：<span>123-456-789</span>
+            </div>
+        </div>
+        <!-- 导航区 -->
+        <div class="nav-box">
+            <div class="nav-left"></div>
+            <ul class="m-nav">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="#">关于慕课</a></li>
+                <li><a href="news.html">新闻动态</a></li>
+                <li><a href="#">课程中心</a></li>
+                <li><a href="#">在线课程</a></li>
+                <li><a href="#">人才招聘</a></li>
+            </ul>
+            <form class="m-sch" action="" method="get">
+                <input class="u-txt" type="text" />
+            </form>  
+            <div class="nav-right"></div>
+        </div>
+        <!-- 轮播图 -->
+        <div id="slidebox">
+            <img src="imgs/ad.jpg" alt="广告" />
+        </div>
+        <!-- 新闻展示区 -->
+        <div class="g-mn clearfix">
+            <!-- 菜单区 -->
+            <div class="m-mnu">
+                <h2>新闻中心</h2>
+                <ul>
+                    <li><a href="#">公司新闻</a></li>
+                    <li><a href="#">行业新闻</a></li>
+                    <li><a href="#">媒体报道</a></li>
+                    <li><a href="#">活动专题</a></li>
+                    <li><a href="#">精彩视频</a></li>
+                    <li><a href="#">资源下载</a></li>
+                </ul>
+            </div>
+            <!-- 内容区 -->
+            <div class="m-cnt">
+                <h2>新闻中心</h2>
+                <ul class="m-lst">
+                    <li><span>yyyy-MM-dd</span><a href="newsDetail.html" target="_blank">新闻内容1</a></li>
+                    <li><span>yyyy-MM-dd</span><a href="#">新闻内容新闻内容新闻内容新闻内容新闻内容2</a></li>
+                    <li><span>yyyy-MM-dd</span><a href="#">新闻内容新闻内容新闻内容3</a></li>
+                    <li><span>yyyy-MM-dd</span><a href="#">新闻内容4</a></li>
+                    <li><span>yyyy-MM-dd</span><a href="#">新闻内容新闻内容新闻内容5</a></li>
+                    <li><span>yyyy-MM-dd</span><a href="#">新闻内容新闻内容5</a></li>
+                    <li><span>yyyy-MM-dd</span><a href="#">新闻内容新闻内容新闻内容新闻内容6</a></li>
+                    <li><span>yyyy-MM-dd</span><a href="#">新闻内容7</a></li>
+                </ul>
+                <!-- 分页器 -->
+                <div class="m-pager">
+                    <a href="#">首页</a>
+                    <a href="#">&lt;</a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">...</a>
+                    <a href="#">&gt;</a>
+                    <a href="#">末页</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 底部 -->
+    <div class="g-ft">
+        <!-- 版权区 -->
+        <ul class="m-cprt">
+            <li><a href="#">关于</a>
+                <ul>
+                    <li><a href="#">品牌故事</a></li>
+                    <li><a href="#">联系我们</a></li>
+                    <li><a href="#">加入我们</a></li>
+                    <li><a href="#">版权声明</a></li>
+                </ul>
+            </li>
+            <li><a href="#">课程</a>
+                <ul>
+                    <li><a href="#">PHP</a></li>
+                    <li><a href="#">Android</a></li>
+                    <li><a href="#">IOS</a></li>
+                    <li><a href="#">JAVA</a></li>
+                </ul>
+            </li>
+            <li><a href="#">留言</a>
+                <ul>
+                    <li><a href="#">新浪微博</a></li>
+                    <li><a href="#">网易博客</a></li>
+                    <li><a href="#">企业微信</a></li>
+                    <li><a href="#">QQ空间</a></li>
+                </ul>
+            </li>
+            <li><a href="#">关注</a>
+                <ul>
+                    <li><a href="#">意见反馈</a></li>
+                    <li><a href="#">问题留言</a></li>
+                    <li><a href="#">媒体联络</a></li>
+                    <li><a href="#">在线客服</a></li>
+                </ul>
+            </li>
+            <li><a href="#"><img src="imgs/weixin.png" />微信关注</a>
+                <ul>
+                    <li><img src="imgs/qrcode.jpg" alt="二维码" /></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+/* 主体 */
+/* 信息展示区 */
+.g-info{
+    height: 250px;
+    margin-top: 5px;
+    background-color: #fff;
+}
+.m-news, .m-course, .m-media{
+    float: left;
+    height: 250px;
+}
+.m-news, .m-course{
+    margin-right: 7px;
+    border: 1px solid #e8e8e8;
+}
+.m-tt{
+    height: 34px;
+    background-color: #e8e8e8;
+}
+.m-tt h2{
+    float: left;
+    /*width: 70%;*/
+    padding-left: 20px;
+    overflow: hidden\9;
+    font: bold 14px/34px "Microsoft Yahei";
+    color: #786f66;
+}
+.m-tt a{
+    float: right;
+    padding-right: 20px;
+    line-height: 34px; /* IE下可能失效 */
+    text-decoration: none;
+    color: #999;
+}
+.m-pic img{
+    float: left;
+    margin: 0 5px;
+}
+.m-pic a{
+    text-decoration: none;
+    color: #c00;
+}
+/* 新闻 */
+.m-news{
+    width: 340px;
+}
+.m-news .m-pic{
+    height: 80px;
+    margin-top: 10px;
+    line-height: 20px;
+}
+/* 课程 */
+.m-course{
+    width: 410px;
+}
+.m-course .m-pic{
+    height: 120px;
+    margin-top: 10px;
+    line-height: 22px;
+}
+.m-course .m-pic p{
+    height: 88px;
+    overflow: hidden;
+}
+.m-course .course-lst{
+    width: 372px;
+    height: 37px;
+    margin: 20px auto;
+    background: url(../imgs/crs_bg.jpg) no-repeat;
+}
+.m-course .course-lst li{
+    float: left;
+    margin: 0 15px;
+    line-height: 37px;
+    text-align: center;
+}
+/* 媒体 */
+.m-media{
+    width: 230px;
+}
+.m-media .video{
+    height: 185px;
+    border: 1px solid #e8e8e8;
+}
+.m-media .video .video-cnt{
+    height: 140px;
+    padding: 5px;
+}
+.m-video .ad{
+    display: block;
+    height: 55px;
+    margin-top: 3px;
+    border: 1px solid #e8e8e8;
+}
