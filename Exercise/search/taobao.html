@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=eage" /> <!-- 强制IE按最新标准版渲染 -->
+    <title>淘宝搜索</title>
+    <link rel="stylesheet" href="css/taobao.css" />
+    <style>
+        /* 字符图标一 */
+        @font-face{
+            font-family: iconfont;
+            src: url(http://g.tbcdn.cn/tb/icon-font/1.1.5/iconfont.eot); /* IE9 */
+            src: url(http://g.tbcdn.cn/tb/icon-font/1.1.5/iconfont.eot?#iefix) format("embedded-opentype"), /* IE6-8 */
+                 url(http://g.tbcdn.cn/tb/icon-font/1.1.5/iconfont.woff) format("woff"), /* chrome,ff */
+                 url(http://g.tbcdn.cn/tb/icon-font/1.1.5/iconfont.ttf) format("truetype"),
+                 url(http://g.tbcdn.cn/tb/icon-font/1.1.5/iconfont.svg#iconfont) format("svg"); /* IOS4.1- */
+        }
+        /* 字符图标二 */
+        /* @font-face{
+            font-family: iconfont;
+            src: url(http://at.alicdn.com/t/font_1404975816_925991.eot);
+            src: url(http://at.alicdn.com/t/font_1404975816_925991.eot?#iefix) format("embedded-opentype"),
+                 url(http://at.alicdn.com/t/font_1404975816_925991.woff) format("woff"),
+                 url(http://at.alicdn.com/t/font_1404975816_925991.ttf) format("truetype"),
+                 url(http://at.alicdn.com/t/font_1404975816_925991.svg#iconfont) format("svg");
+        } */
+        .u-icnfont{
+            font-family: iconfont;
+            font-size: 12px;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+    <!-- 搜索框 -->
+    <div class="sch-box">
+        <ul class="m-tab">
+        	<li class="z-sel"><a href="#">宝贝</a></li>
+        	<li><a href="#">店铺</a></li>
+        </ul>
+        <form id="frm" action="" target="_blank">
+            <div class="m-txt">
+	            <!-- x-webkit-speech表示在chrome中调用语音搜索功能(已废弃) -->
+                <input type="text" x-webkit-speech="" />
+                <!-- 字符图标一 -->
+                <i class="u-icnfont">ő</i>
+                <!-- 字符图标二 -->
+                <!-- <i class="u-icnfont">&#xe613;</i> -->
+            </div>
+            <button class="u-btn-sch" type="submit">搜 索</button>
+            <a class="u-scha" href="#">高级<br />搜索</a>
+        </form>
+    </div>
+
+    <script src="js/global.js"></script>
+    <script src="js/taobao.js"></script>
+</body>
+</html>

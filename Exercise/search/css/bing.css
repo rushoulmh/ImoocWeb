@@ -1,0 +1,69 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #333;
+}
+/* 背景 */
+.g-bg{
+    position: relative;
+    width: 1366px;
+    height: 768px;
+    margin: 0 auto;
+    background-image: url(../imgs/river.jpg);
+}
+/* 搜索框 */
+.m-sch{
+    position: absolute;
+    top: 200px;
+    left: 300px;
+}
+.m-sch .u-logo{
+    float: left;
+    width: 107px;
+    height: 35px;
+    margin: -4px 18px 0 0;
+    background-image: url(../imgs/logo.png);
+}
+.m-sch form{
+    float: left;
+    background-color: #fff;
+}
+.m-sch .u-txt{
+    float: left;
+    width: 350px;
+    height: 25px;
+    line-height: 25px;
+    padding: 5px;
+    border-width: 0;
+    outline: none; /* 去掉Chrome下输入框的外框 */
+}
+.m-sch .u-btn{
+    float: left;
+    width: 29px;
+    height: 29px;
+    margin: 2px 2px 2px 0;
+    border-width: 0;
+    background-image: url(../imgs/search.png);
+    cursor: pointer;
+}
+/* 智能提示框 */
+.m-suggest{
+    /* position: absolute;
+    top: 236px;
+    left: 425px;
+    width: 391px; */
+    list-style: none;
+    background-color: #fff;
+}
+.m-suggest li{
+    padding: 3px;
+    line-height: 25px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.m-suggest li:hover{
+    text-decoration: underline;
+    background-color: #e5e5e5;
+}

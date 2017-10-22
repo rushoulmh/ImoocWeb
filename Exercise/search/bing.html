@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=eage" /> <!-- 强制IE按最新标准版渲染 -->
+    <title>Bing搜索</title>
+    <link rel="stylesheet" href="css/bing.css" />
+</head>
+<body>
+    <div class="g-bg">
+        <!-- 搜索框 -->
+        <div class="m-sch">
+            <div class="u-logo"></div>
+            <form id="frm" action="https://cn.bing.com/search" target="_blank">
+                <input class="u-txt" type="text" />
+                <input class="u-btn" type="submit" value="" />
+            </form>
+        </div>
+        <!-- 智能提示 -->
+        <ul class="m-suggest" style="display: none;">
+            <li>搜索结果1</li>
+            <li>搜索结果2</li>
+        </ul>
+    </div>
+
+    <!-- JQ方法 -->
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="js/bing-jq.js"></script>
+    <!-- JS方法 -->
+    <!-- <script src="js/global.js"></script>
+    <script src="js/bing.js"></script> -->
+</body>
+</html>
