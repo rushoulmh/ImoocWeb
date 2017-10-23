@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>load/get/post请求</title>
+    <title>get/post请求</title>
     <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
     <style>
         #main {
@@ -22,16 +22,6 @@
 </head>
 <body>
     <div id="main">
-        <h3>load()加载</h3>
-        <p>用法：<i>$ele</i>.load(<i>url</i>[, <i>data</i>]?[, <i>complete</i>]?)<br />
-            备注：complete(<i>responseTxt</i>, <i>statusTxt</i>, <i>xhr</i>)为加载完成后执行的函数。</p>
-        <div class="load">
-            <span>我最爱吃的水果</span>
-            <button id="bLoad">load</button>
-            <ul id="lLoad"></ul>
-        </div>
-
-        <hr />
         <h3>get请求</h3>
         <p>用法：jQuery.get(<i>url</i>[, <i>data</i>]?[, <i>success</i>]?[, <i>datatype</i>]?)<br />
             用法：jQuery.getJSON(<i>url</i>[, <i>data</i>]?[, <i>success</i>]?)，相当于jQuery.get(<i>url</i>[, <i>data</i>]?[, <i>success</i>]?, &quot;json&quot;)<br />
@@ -53,19 +43,6 @@
 
     <script>
         $(function() {
-            // load()
-            $("#bLoad").bind("click", function() {
-                var $that = $(this);
-                $("#lLoad").load("material/fruit.html li", function(res, status, xhr) {
-                    $that.attr("disabled", "true");
-                    if(status == "success") {
-                        alert("load加载成功！");
-                    } else if(status == "error") {
-                        $(this).append("Error: " + xhr.status + ": " + xhr.statusText);
-                    }
-                });
-            });
-
             // get请求
             $("#bGet").bind("click", function() {
                 var $that = $(this);

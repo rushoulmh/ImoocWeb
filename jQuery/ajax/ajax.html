@@ -18,24 +18,35 @@
             padding: 5px;
             background-color: #bfa;
         }
+        #pWait {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <div id="main">
-        <h3>ajax()请求</h3>
-        <p>用法：jQuery.ajax(<i>settings</i>)<br />
-            全局设置：jQuery.ajaxSetup(<i>options</i>)</p>
-        <div class="ajax">
-            <span>我最喜欢的一项运动</span>
-            <button id="bAjax">ajax-get</button>
-            <ul id="lAjax"></ul>
-            <p id="pWait">loading</p>
+        <h3>load()加载</h3>
+        <p>用法：<i>$ele</i>.load(<i>url</i>[, <i>data</i>]?[, <i>complete</i>]?)<br />
+            备注：complete(<i>responseTxt</i>, <i>statusTxt</i>, <i>xhr</i>)为加载完成后执行的函数。</p>
+        <div class="load">
+            <span>我最爱吃的水果</span>
+            <button id="bLoad">load</button>
+            <ul id="lLoad"></ul>
         </div>
 
         <hr />
-        <h3>触发函数fn</h3>
-        <p>发出请求前触发：<i>$ele</i>.ajaxStart(<i>fn</i>)<br />
-            请求成功后触发：<i>$ele</i>.ajaxStop(<i>fn</i>)</p>
+        <h3>ajax()请求</h3>
+        <p>用法：jQuery.ajax(<i>settings</i>)<br />
+            全局设置：jQuery.ajaxSetup(<i>options</i>)<br />
+            发出请求前触发fn：<i>$ele</i>.ajaxStart(<i>fn</i>)<br />
+            请求成功后触发fn：<i>$ele</i>.ajaxStop(<i>fn</i>)</p>
+        <div class="ajax">
+            <span>我最喜欢的一项运动</span>
+            <button id="bAjax1">ajax-get</button>
+            <button id="bAjax2">ajax-post</button>
+            <ul id="lAjax"></ul>
+            <p id="pWait">loading</p>
+        </div>
 
         <hr />
         <h3>序列化</h3>
@@ -57,19 +68,32 @@
 
     <script>
         $(function() {
+            // load()
+            $("#bLoad").bind("click", function() {
+                var $that = $(this);
+                $("#lLoad").load("material/fruit.html li", function(res, status, xhr) {
+                    $that.attr("disabled", "true");
+                    if(status == "success") {
+                        alert("load加载成功！");
+                    } else if(status == "error") {
+                        $(this).append("Error: " + xhr.status + " " + xhr.statusText);
+                    }
+                });
+            });
+
             // ajax请求
+            // 绑定事件
             var wait = $("#pWait");
-            wait.hide();
             wait.ajaxStart(function() {$(this).show();});
             wait.ajaxStop(function() {$(this).hide();});
-            $("#bAjax").click(function() {
+            // 全局设置
+            /*$.ajaxSetup({
+                type: "POST",
+                datatype: "text"
+            });*/
+            // ajax-get
+            $("#bAjax1").click(function() {
                 var $this = $(this);
-                // 全局设置
-                /*$.ajaxSetup({
-                    type: "POST",
-                    datatype: "text"
-                });*/
-                // ajax-get
                 $.ajax({
                     type: "GET",
                     url: "material/sport.json",
@@ -83,16 +107,21 @@
                         });
                     }
                 });
-                // ajax-post
-                /*$.ajax({
+            });
+            // ajax-post
+            $("#bAjax2").click(function() {
+                var $this = $(this);
+                $.ajax({
                     type: "POST",
-                    url: "http://www.imooc.com/data/check.php",
-                    data: {num: 5},
+                    url: "material/demo.php",
+                    data: {
+                        name: "eee"
+                    },
                     success: function(res) {
                         $this.attr("disabled", "true");
-                        $("#lAjax").append("<li>数字5是 <b>" + res + "</b></li>");
+                        $("#lAjax").append("<li>" + res + "</li>");
                     }
-                });*/
+                });
             });
 
             // 序列化
