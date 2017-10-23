@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>load/get/post请求</title>
+    <script src="http://apps.bdimg.com/libs/jquery/1.10.0/jquery.min.js"></script>
+    <style>
+        #main {
+            font: 14px arial, "Microsoft Yahei", sans-serif;
+        }
+        #main > h3 {
+            margin: 10px;
+        }
+        #main > p {
+            width: 450px;
+            /*height: 50px;*/
+            margin: 5px;
+            padding: 5px;
+            background-color: #bfa;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <h3>load()加载</h3>
+        <p>用法：<i>$ele</i>.load(<i>url</i>[, <i>data</i>]?[, <i>complete</i>]?)<br />
+            备注：complete(<i>responseTxt</i>, <i>statusTxt</i>, <i>xhr</i>)为加载完成后执行的函数。</p>
+        <div class="load">
+            <span>我最爱吃的水果</span>
+            <button id="bLoad">load</button>
+            <ul id="lLoad"></ul>
+        </div>
+
+        <hr />
+        <h3>get请求</h3>
+        <p>用法：jQuery.get(<i>url</i>[, <i>data</i>]?[, <i>success</i>]?[, <i>datatype</i>]?)<br />
+            用法：jQuery.getJSON(<i>url</i>[, <i>data</i>]?[, <i>success</i>]?)，相当于jQuery.get(<i>url</i>[, <i>data</i>]?[, <i>success</i>]?, &quot;json&quot;)<br />
+            用法：jQuery.getScript(<i>url</i>[, <i>success</i>]?)，相当于jQuery.get(<i>url</i>[, <i>success</i>]?, &quot;script&quot;)<br />
+            备注：success(<i>result</i>[, <i>statusTxt</i>]?[, <i>jqXHR</i>]?)为请求成功后执行的函数。</p>
+        <div class="get">
+            <span>我最喜欢的一项运动</span>
+            <button id="bGet">get</button>
+            <ul id="lGet"></ul>
+        </div>
+
+        <hr />
+        <h3>post请求</h3>
+        <p>用法：jQuery.post(<i>url</i>[, <i>data</i>]?[, <i>success</i>]?[, <i>datatype</i>]?)</p>
+        <div class="post">
+            <button id="bPost">post</button>
+            <ul id="lPost"></ul>
+        </div>
+
+    <script>
+        $(function() {
+            // load()
+            $("#bLoad").bind("click", function() {
+                var $that = $(this);
+                $("#lLoad").load("material/fruit.html li", function(res, status, xhr) {
+                    $that.attr("disabled", "true");
+                    if(status == "success") {
+                        alert("load加载成功！");
+                    } else if(status == "error") {
+                        $(this).append("Error: " + xhr.status + ": " + xhr.statusText);
+                    }
+                });
+            });
+
+            // get请求
+            $("#bGet").bind("click", function() {
+                var $that = $(this);
+                /*$.getJSON("material/sport.json", function(res) {
+                    $that.attr("disabled", "true");
+                    $.each(res, function(i, item) {
+                        if(i == 3){
+                            $("#lGet").append("<li>" + item["name"] + "</li>");
+                        }
+                    });
+                });*/
+                $.get("material/sport.json", function(res, status) {
+                    $that.attr("disabled", "true");
+                    $("#lGet").append("<li>状态：" + status + "</li>");
+                    $.each(res, function(i, item) {
+                        if(i == 3){
+                            $("#lGet").append("<li>" + item["name"] + "</li>");
+                        }
+                    });
+                }, "json");
+            });
+
+            // post请求
+            $("#bPost").bind("click", function() {
+                $.post("material/demo.php", {
+                    num: "li"
+                }, function(res, status) {
+                    $("#lPost").append("<li>状态：" + status + "</li><li>" + res + "</li>");
+                });
+            });
+        });
+    </script>
+</body>
+</html>
