@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>form插件</title>
+    <style>
+        .box {
+            width: 450px;
+            font-size: 12px;
+            background-color: #bfc;
+        }
+    </style>
+</head>
+<body>
+    <h3>将form提交升级为ajax提交</h3>
+    <div class="box">
+        提交前准备：$(<i>frm</i>).ajaxForm([<i>options</i> | <i>fn</i>]?)<br />
+        立即提交：$(<i>frm</i>).ajaxSubmit([<i>options</i> | <i>fn</i>]?)<br />
+        序列化表单数据：$(<i>frm</i>).formSerialize()<br />
+        序列化表单指定区域的数据：$(<i>field</i>).fieldSerialize()<br />
+        返回表单指定区域的value值：$(<i>field</i>).fieldValue()<br />
+        重置表单数据：$(<i>frm</i>).resetForm()<br />
+        清除表单数据：$(<i>frm</i>).clearForm()<br />
+        清除表单指定区域的数据：$(<i>field</i>).clearFields()
+    </div>
+    <form id="frm" method="post" action="demo.php">
+        <fieldset class="field">
+            <legend>个人信息页</legend>
+            <p>
+                <label for="uid">用户名：</label>
+                <input type="text" name="uid" id="uid" />
+            </p>
+            <p>
+                <label for="pwd">密码：</label>
+                <input type="password" name="pwd" id="pwd" />
+            </p>
+            <p>
+                <button id="bSubmit" type="submit">提交</button>
+                <button id="bReset">重置</button>
+            </p>
+        </fieldset>
+        <p id="info"></p>
+        <dl id="msg"></dl>
+    </form>
+
+    <script src="../vendor/jquery-1.10.0.js"></script>
+    <script src="../vendor/jquery.form.min.js"></script>
+    <script>
+        $(function() {
+            var dl = $("#msg"),
+                $frm = $("#frm");
+
+            // 设置options
+            var opt = {
+                target: "#info",
+                beforeSubmit: function showRequest(data, frm, opt) {
+                    var query = $.param(data), // 序列化表单数据
+                        // query = $frm.formSerialize(),
+                        // query = $frm.find(".field").fieldSerialize(),
+                        frmEle = frm[0],
+                        len = data.length;
+                    dl.append("<dt>beforeSubmit</dt>");
+                    dl.append("<dd>queryString: " + query + "</dd>");
+                    dl.append("<dd>length: " + len + "</dd>");
+                    for(var i=0; i<len; i++) {
+                        dl.append("<dd>" + data[i].name + ": " + data[i].value + "</dd>");
+                    }
+                    dl.append("<dt>jQuery form对象 form#" + frmEle.id + "</dt>");
+                    dl.append("<dd>method: " + $(frmEle).attr("method") + "</dd>");
+                    dl.append("<dd>url: " + $(frmEle).attr("action") + "</dd>");
+                    return true; // 在提交ajax前验证
+                },
+                success: function showResponse(response, status, xhr, frm) {
+                    dl.append("<dt>success</dt>");
+                    dl.append("<dd>" + xhr.responseText + " == " + frm.attr("method") + "</dd>");
+                    dl.append("<dd>status: " + status + "</dd>");
+                    dl.append("<dd>responseText: " + response + "</dd>");
+                }
+            };
+
+            // ajaxForm()
+            $frm.ajaxForm(opt);
+
+            // ajaxSubmit()
+            $("#bSubmit").submit(function() {
+                $(this).ajaxSubmit();
+                return false; // 阻止表单跳转
+            });
+
+            // resetForm()
+            $("#bReset").click(function() {
+                $frm.resetForm();
+            });
+        });
+    </script>
+</body>
+</html>
