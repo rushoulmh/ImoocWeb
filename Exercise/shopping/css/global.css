@@ -1,0 +1,85 @@
+/* reset */
+html, body, h1, h2, h3, h4, h5, h6, div, dl, dt, dd, ul, ol, li, p, blockquote, pre, hr, figure, table, caption, th, td, form, fieldset, legend, input, button, textarea, menu{
+    margin: 0;
+    padding: 0;
+}
+header, footer, section, article, aside, nav, hgroup, address, figure, figcaption, menu, details{
+    display: block;
+}
+body, textarea, input, button, select, keygen, legend{
+    font:14px/1.5 helvetica, arial, \5FAE\8F6F\96C5\9ED1, \51AC\9752\9ED1\4F53, sans-serif;
+    color: #333;
+    outline: 0;
+}
+html, body, fieldset, img, iframe, abbr{
+    border: 0; /* IE6下不识别none */
+}
+body{
+    background-color: #fff;
+}
+h1, h2, h3, h4, h5, h6, em, strong, b{
+    font-weight: bold;
+}
+h1, h2, h3, h4, h5, h6, small{
+    font-size: 100%;
+}
+i, cite, em, var, address, dfn{
+    font-style: normal;
+}
+del, ins, u, s, a, a:hover{
+    text-decoration:none;
+}
+a, button{
+    cursor: pointer;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+caption, th{
+    text-align: left;
+    font-weight: normal;
+}
+ul{
+    list-style: none;
+}
+
+/* function */
+/* 浮动 */
+.f-fl{
+    float: left;
+}
+.f-fr{
+    float: right;
+}
+/* 清除浮动 */
+.f-cb:after{
+    display: block;
+    clear: both;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    content: "";
+}
+*html .f-cb{
+    zoom: 1;
+}
+/* 显示隐藏 */
+.f-dn{
+    display: none;
+}
+.f-db{
+    display: block;
+}
+.f-dib{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+/* 指针 */
+.f-csp{
+    cursor: pointer;
+}
+.f-csd{
+    cursor: default;
+}
