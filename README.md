@@ -41,8 +41,13 @@
     - fade：淡入和淡出，来自《[jQuery基础(四)—动画篇](http://www.imooc.com/learn/430)》第3章
     - animate：自定义动画，来自《[jQuery基础(四)—动画篇](http://www.imooc.com/learn/430)》第5章
   - plugin
-    - Validation：Validation插件，来自《[jQuery插件——Validation Plugin](http://www.imooc.com/learn/385)》
+    - Validation：validation插件，来自《[jQuery插件——Validation Plugin](http://www.imooc.com/learn/385)》
+    - Form：form插件，《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第2章
+    - Image：lightBox插件和jqzoom插件，《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第2章
 - Exercise
   - menubar：仿京东导航菜单（CSS版和JS版），来自《[商城分类导航效果](http://www.imooc.com/learn/174)》
   - navPage：定位导航（JS版和JQ版），来自《[网页定位导航特效](http://www.imooc.com/learn/56)》
   - waterfall：瀑布流布局（CSS版、JS版和JQ版），来自《[瀑布流布局](http://www.imooc.com/learn/101)》
+  - search：搜索框（JS版和JQ版），来自《[搜索框制作](http://www.imooc.com/learn/21)》
+  - imoocPage：网页综合布局，来自《[企业网站综合布局实战](http://www.imooc.com/learn/147)》
+  - shopping：购物网站开发（未完成），来自《[手把手教你实现电商网站开发](http://www.imooc.com/learn/100)》
