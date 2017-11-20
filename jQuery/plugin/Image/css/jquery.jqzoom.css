@@ -1,0 +1,57 @@
+div.jqZoomTitle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5000;
+    width: 100%;
+    height: 16px;
+    padding-top: 2px;
+    font: 11px Tahoma;
+    text-align: center;
+    color: #fff;
+    background-color: #999;
+}
+
+.jqZoomPup {
+    z-index: 10;
+    border-color: #c4c4c4;
+    border-style: solid;
+    overflow: hidden;
+    -moz-opacity:0.6;
+         opacity: 0.6;
+    filter: alpha(opacity=60);
+    background-color: #fff;
+    cursor: crosshair;
+}
+
+.jqZoomPup img {
+    border: 0;
+}
+
+.preload {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    z-index: 10;
+    width: 90px;
+    *width: 100px;
+    height: 43px;
+    *height: 55px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    -moz-opacity: 0.8;
+         opacity: 0.8;
+    filter: alpha(opacity=80);
+    font: 12px Tahoma;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    background: #fff url(../imgs/zoom.gif) no-repeat 43px 30px;
+}
+
+.jqZoomWindow {
+    border: 1px solid #999;
+    background-color: #fff;
+}
+
+
