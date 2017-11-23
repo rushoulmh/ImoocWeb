@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>cookie插件</title>
+    <style>
+        .box {
+            width: 450px;
+            font-size: 12px;
+            background-color: #bfc;
+        }
+    </style>
+</head>
+<body>
+    <h3>cookie插件——cookie</h3>
+    <div class="box">
+        保存：$.cookie(<i>key</i>, <i>value</i>[, <i>options</i>])<br />
+        读取：$.cookie(<i>key</i>)<br />
+        删除：$.cookie(<i>key</i>, null[, <i>options</i>])
+    </div>
+    <form>
+        <label>邮箱：<input id="email" type="email" /></label>
+        <input id="chk" type="checkbox" />是否保存邮箱<br />
+        <button id="btnSet">设置</button>
+    </form>
+
+    <script src="../vendor/jquery1.8.3.min.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script>
+        $(function() {
+            var key = "email";
+            if($.cookie(key)) {
+                // 如果cookie对象存在，则将输入框的内容显示为该cookie值
+                $("#email").val($.cookie(key));
+            }
+            $("#btnSet").click(function() {
+                // 如果选项被选中，则保存cookie，否则删除
+                if($("#chk").is(":checked")) {
+                    $.cookie(key, {
+                        path: "/", // 保存路径
+                        expires: 7 // 过期时间
+                    });
+                } else {
+                    $.cookie(key, null);
+                }
+                console.log($.cookie(key));
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jqzoom插件</title>
+    <link rel="stylesheet" href="css/jquery.jqzoom.css" />
+    <style>
+        .box {
+            width: 450px;
+            font-size: 12px;
+            background-color: #bfc;
+        }
+    </style>
+</head>
+<body>
+    <h3>图片放大镜插件——jqzoom</h3>
+    <div class="box">
+        格式：$(<i>imgLnk</i>).jqzoom(<i>options</i>)
+    </div>
+    <div id="zoom">
+    	<a id="jqzoom" href="imgs/rabbit1.jpg" title="rabbit">
+    		<img src="imgs/rabbit2.jpg" alt="" />
+    	</a>
+    </div>
+
+    <script src="../vendor/jquery1.8.3.min.js"></script>
+    <script src="js/jquery.jqzoom.min.js"></script>
+    <script>
+        $(function() {
+            $("#zoom a").jqzoom({
+                zoomWidth: 100, // 放大镜区域的宽
+                zoomHeight: 100, // 放大镜区域的高
+                zoomType: "reverse" // 设置放大镜的类型
+            });
+        });
+    </script>
+</body>
+</html>

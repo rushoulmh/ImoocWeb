@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>lightBox插件</title>
+    <link rel="stylesheet" href="css/jquery.notesforlightbox.css" />
+    <style>
+        .box {
+            width: 450px;
+            font-size: 12px;
+            background-color: #bfc;
+        }
+        #pics {
+            margin: 0;
+            padding: 8px 0;
+            list-style-type: none;
+        }
+        #pics li {
+            display: inline;
+        }
+        #pics img {
+            width: 75px;
+            height: 75px;
+            border: 2px solid #444;
+        }
+        #pics a:hover {
+            color: #fff;
+        }
+        #pics a:hover img {
+            border: 3px solid #fff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h3>图片灯箱插件——lightBox</h3>
+    <div class="box">
+        格式：$(<i>imgLnk</i>).lightBox(<i>options</i>)
+    </div>
+    <ul id="pics">
+        <li><a href="imgs/1.jpg" title="第1篇风景图片">
+            <img src="imgs/1.jpg" alt="" />
+        </a></li>
+        <li><a href="imgs/2.jpg" title="第2篇风景图片">
+            <img src="imgs/2.jpg" alt="" />
+        </a></li>
+        <li><a href="imgs/3.jpg" title="第3篇风景图片">
+            <img src="imgs/3.jpg" alt="" />
+        </a></li>
+    </ul>
+
+    <script src="../vendor/jquery1.8.3.min.js"></script>
+    <script src="js/jquery.notesforlightbox.js"></script>
+    <script>
+        $(function() {
+            $("#pics a").lightBox({
+                overlayBgColor: "#666", // 图片浏览时的背景色
+                overlayOpacity: 0.5, // 背景色的透明度
+                containerResizeSpeed: 600 // 图片切换时的速度
+            });
+        });
+    </script>
+</body>
+</html>

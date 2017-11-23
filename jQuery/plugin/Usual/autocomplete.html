@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>autocomplete插件</title>
+    <link href="css/jquery.autocomplete.css" rel="stylesheet" />
+    <style>
+        .box {
+            width: 450px;
+            font-size: 12px;
+            background-color: #bfc;
+        }
+    </style>
+</head>
+<body>
+    <h3>自动补全插件——autocomplete</h3>
+    <div class="box">
+        格式：$(<i>txtBox</i>.autocomplete(<i>urlData</i>[, <i>options</i>])
+    </div>
+    <form>
+        <label>用户名：<input id="uid" type="text" /></label>
+        <div class="tip"></div>
+    </form>
+
+    <script src="../vendor/jquery1.8.3.min.js"></script>
+    <script src="js/jquery.autocomplete.js"></script>
+    <script>
+        $(function() {
+            var names = ["Lily", "135", "Nancy", "Lucy", "12345"];
+            $("#uid").autocomplete(names, {
+                minChars: 0, //最少需要输入的字符数
+                max: 5, // 下拉项的最大个数
+                formatItem: function(item, i, total) {
+                    return "<i>" + item[0] + "</i>";
+                }, // 设置下拉项的显示格式
+                formatMatch: function(item, i, total) {
+                    return item[0];
+                }, // 设置数据的匹配格式
+                formatResult: function(item) {
+                    return item[0];
+                } // 格式化最终返回的数据
+            }).result(function(e, data, formatted) {
+                $(".tip").show().html("您的选择：" + (!data ? "" : formatted));
+            }); // 选择选项后触发result函数
+        });
+    </script>
+</body>
+</html>
