@@ -44,6 +44,7 @@
     - Validation：validation插件，来自《[jQuery插件——Validation Plugin](http://www.imooc.com/learn/385)》
     - Form：form插件，《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第2章
     - Image：lightBox插件和jqzoom插件，《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第2章
+    - Other：cookie插件和autocomplete插件，《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第2章
 - Exercise
   - menubar：仿京东导航菜单（CSS版和JS版），来自《[商城分类导航效果](http://www.imooc.com/learn/174)》
   - navPage：定位导航（JS版和JQ版），来自《[网页定位导航特效](http://www.imooc.com/learn/56)》
