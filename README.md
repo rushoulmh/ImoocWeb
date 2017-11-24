@@ -41,10 +41,9 @@
     - fade：淡入和淡出，来自《[jQuery基础(四)—动画篇](http://www.imooc.com/learn/430)》第3章
     - animate：自定义动画，来自《[jQuery基础(四)—动画篇](http://www.imooc.com/learn/430)》第5章
   - plugin
-    - Validation：validation插件，来自《[jQuery插件——Validation Plugin](http://www.imooc.com/learn/385)》
-    - Form：form插件，《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第2章
-    - Image：lightBox插件和jqzoom插件，《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第2章
-    - Other：cookie插件和autocomplete插件，《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第2章
+    - Validation：表单验证插件，来自《[jQuery插件——Validation Plugin](http://www.imooc.com/learn/385)》
+    - Usual：常用插件（表单插件、cookie插件、图片插件等），《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第2章
+    - UI：UI型插件（拖放插件、tabs插件等），《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第3章
 - Exercise
   - menubar：仿京东导航菜单（CSS版和JS版），来自《[商城分类导航效果](http://www.imooc.com/learn/174)》
   - navPage：定位导航（JS版和JQ版），来自《[网页定位导航特效](http://www.imooc.com/learn/56)》
