@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>lifocuscolor插件</title>
+    <style>
+        .box {
+            width: 450px;
+            font-size: 12px;
+            background-color: #bfc;
+        }
+    </style>
+</head>
+<body>
+    <h3>自定义对象级插件——lifocuscolor</h3>
+    <div class="box">
+        格式：$(<i>id</i>).focusColor(<i>color</i>)
+    </div>
+    <ul id="lst">
+        <li>item1</li>
+        <li>item2</li>
+        <li>item3</li>
+    </ul>
+
+    <script src="../vendor/jquery1.8.3.min.js"></script>
+    <script src="js/jquery.lifocuscolor.js"></script>
+    <script>
+        $(function() {
+            $("#lst").focusColor("#ddd");
+        });
+    </script>
+</body>
+</html>

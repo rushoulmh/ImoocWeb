@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>twoaddresult插件</title>
+    <style>
+        .box {
+            width: 450px;
+            font-size: 12px;
+            background-color: #bfc;
+        }
+    </style>
+</head>
+<body>
+    <h3>自定义类级别插件——twoaddresult</h3>
+    <div class="box">
+        加法：$.addNum(<i>num1</i>, <i>num2</i>)<br />
+        减法：$.subNum(<i>num1</i>, <i>num2</i>)
+    </div>
+    <div>
+        <input type="text" id="txt1" /> -
+        <input type="text" id="txt2" /> =
+        <input type="text" id="txt3" /><br />
+        <button id="btn">计算</button>
+    </div>
+
+    <script src="../vendor/jquery1.8.3.min.js"></script>
+    <script src="js/jquery.twoaddresult.js"></script>
+    <script>
+        $(function() {
+            $("#btn").click(function() {
+                // "0"的意义：
+                // 1、input#txt2未输入数据时，默认为0；
+                // 2、可以做负数运算
+                var res = $.subNum($("#txt1").val(), "0" + $("#txt2").val());
+                console.log("结果：" + res);
+                $("#txt3").val(res);
+            });
+        });
+    </script>
+</body>
+</html>

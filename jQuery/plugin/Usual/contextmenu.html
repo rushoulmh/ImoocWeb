@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>contextMenu插件</title>
+    <link href="css/jquery.contextmenu.css" rel="stylesheet" />
+    <style>
+        .box {
+            width: 450px;
+            font-size: 12px;
+            background-color: #bfc;
+        }
+        ul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <h3>右键菜单插件——contextMenu</h3>
+    <div class="box">
+        格式：<i>$ele</i>.contextMenu(<i>menuID</i>, <i>options</i>)
+    </div>
+    <div>
+        <div>
+            <p class="demo">右键点击显示菜单</p>
+            <p class="demo" id="hide">不显示</p>
+            <p class="demo" id="one">仅显示第一项</p>
+        </div>
+        <!-- 右键菜单的class必须为contextMenu -->
+        <div id="mnu" class="contextMenu">
+            <ul>
+                <li id="li0"><img src="imgs/new.jpg" alt="new">新建</li>
+                <li id="li1"><img src="imgs/save.jpg" alt="save">保存</li>
+                <li id="li2"><img src="imgs/exit.jpg" alt="exit">退出</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="../vendor/jquery1.8.3.min.js"></script>
+    <script src="js/jquery.contextmenu.r2.min.js"></script>
+    <script>
+        $(function() {
+            $("p.demo").contextMenu("mnu", {
+                // 菜单样式
+                menuStyle: {
+                    border: "2px solid #000"
+                },
+                // 菜单项样式
+                itemStyle: {
+                    fontFamily: "Microsoft Yahei",
+                    backgroundColor: "#eee"
+                },
+                // 菜单项悬停样式
+                itemHoverStyle: {
+                    color: "#f00"
+                },
+                // 关联项事件
+                bindings: {
+                    "li0": function(itm) {
+                        console.log("您点击了 新建 项");
+                    },
+                    "li1": function(itm) {
+                        console.log("您点击了 保存 项");
+                    },
+                    "li2": function(itm) {
+                        console.log("您点击了 退出 项");                    
+                    }
+                },
+                // 是否显示菜单
+                onContextMenu: function(e) {
+                    // return $(e.target).attr("id") == "hide";
+                    if($(e.target).attr("id") == "hide") {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                },
+                // 显示菜单哪几项
+                onShowMenu: function(e, mnu) {
+                    if($(e.target).attr("id") == "one") {
+                        $("#li1, #li2", mnu).remove();
+                    }
+                    return mnu;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
