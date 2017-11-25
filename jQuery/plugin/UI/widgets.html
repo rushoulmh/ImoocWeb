@@ -5,30 +5,37 @@
     <title>小部件插件</title>
     <link rel="stylesheet" href="css/jquery-ui.min.css" />
     <style>
+        input {outline: 0;}
         .box {
             width: 450px;
             font-size: 12px;
             background-color: #bfc;
         }
-        #accord, #tabs {
-            width: 500px;
+        #accord, #tabs, #dlg, #mnu {
+            width: 400px;
+        }
+        .no-close .ui-dialog-titlebar-close {
+            display: none;
+        }
+        .ui-menu {
+            width: 200px;
         }
     </style>
 </head>
 <body>
     <h3>折叠面板插件——accordion</h3>
     <div class="box">
-        格式：<i>$ele</i>.accordion(<i>options</i>)
+        格式：<i>$ele</i>.accordion(<i>options</i>?)
     </div>
     <div id="accord">
-        <h3 class="ui-accordion-header">panel001</h3>
-        <ul class="ui-accordion-content">
+        <h4>panel001</h4>
+        <ul>
             <li>item001</li>
             <li>item002</li>
             <li>item003</li>
         </ul>
-        <h3 class="ui-accordion-header">panel02</h3>
-        <ul class="ui-accordion-content">
+        <h4>panel02</h4>
+        <ul>
             <li>something01</li>
             <li>something02</li>
             <li>something03</li>
@@ -40,21 +47,68 @@
     <hr />
     <h3>标签页插件——tabs</h3>
     <div class="box">
-        格式：<i>$ele</i>.tabs(<i>options</i>)
+        格式：<i>$ele</i>.tabs(<i>options</i>?)
     </div>
     <div id="tabs">
-        <ul class="ui-tabs-nav">
-            <li><a href="#tab1">item01</a></li>
-            <li><a href="#tab2">item02</a></li>
-            <li><a href="demo.php">item03（无内容）</a></li>
+        <ul>
+            <li><a href="#tab1">tab01</a></li>
+            <li><a href="#tab2">tab02</a></li>
+            <li><a href="demo.php">ajax</a></li>
         </ul>
-        <div id="tab1" class="ui-tabs-panel">
+        <div id="tab1">
             面板1 jjjjjjjjj aaaaaaaa 00aaaaaa cccccccccc aaaaaaa dddddddddd dddddwwwwwwwww
         </div>
-        <div id="tab2" class="ui-tabs-panel">
+        <div id="tab2">
             面板2
         </div>
     </div>
+
+    <hr />
+    <h3>对话框插件——dialog</h3>
+    <div class="box">
+        格式：<i>$ele</i>.dialog(<i>options</i>?)
+    </div>
+    <div id="dlg">
+        <div>
+            <span class="spn">张三</span>
+            <button id="btnDel">删除</button>
+        </div>
+        <div id="dlgMdl"></div>
+    </div>
+
+    <hr />
+    <h3>菜单插件——menu</h3>
+    <div class="box">
+        格式：<i>$ele</i>.menu(<i>options</i>?)
+    </div>
+    <ul id="mnu">
+        <li>
+            <a href="#" id="tip" title="该提示来自tooltip插件">鼠标移上来</a>
+        </li>
+        <li>-</li> <!-- 分隔符 -->
+        <li><a href="#">显示二级菜单</a>
+            <ul>
+                <li><a href="#">sub menu 2-1</a></li>
+                <li><a href="#">sub menu 2-2</a></li>
+                <li><a href="#">sub menu 2-3</a></li>
+            </ul>
+        </li>
+        <li> </li> <!-- 分隔符 -->
+        <li class="ui-state-disabled">
+            <a href="#"><i class="ui-icon ui-icon-print"></i>打印</a>
+        </li>
+    </ul>
+
+    <hr />
+    <h3>旋转器插件——spinner</h3>
+    <div class="box">
+        格式：<i>$ele</i>.spinner(<i>options</i>?)
+    </div>
+    <div id="spin">
+        <label for="">选择颜色值：<input type="text" id="txtSel"></label>
+        <span id="spnPrev">&emsp;</span>
+    </div>
+
 
     <script src="../vendor/jquery1.10.2.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
@@ -90,6 +144,97 @@
                     ui.jqXHR.error(function() {
                         ui.panel.html("无法加载该标签");
                     });
+                }
+            });
+
+            // dialog
+            $("#btnDel").click(function() {
+                if($("#dlg .spn").html() != null) {
+                    openDlg("确定删除吗？");
+                    return false;
+                }
+            });
+            function openDlg(msg) {
+                $("#dlgMdl").dialog({
+                    // 模态对话框
+                    modal: true,
+                    // 对话框高度
+                    // height: 160,
+                    // 对话框标题，可以直接写在div#dlg上
+                    title: "提示",
+                    // “显示”效果
+                    show: {
+                        effect: "blind",
+                        duration: 1000
+                    },
+                    // “隐藏”效果
+                    hide: "slide",
+                    // 不显示关闭按钮
+                    dialogClass: "no-close",
+                    // 设置按钮
+                    buttons: {
+                        "确定": function() {
+                            $("#dlg .spn").remove();
+                            $(this).dialog("close");
+                        },
+                        "取消": function() {
+                            $(this).dialog("close");
+                        }
+                    },
+                    // 打开对话框时触发
+                    open: function(e, ui) {
+                        $(this).html("");
+                        $(this).append("<p>" + msg + "</p>");
+                    }
+                });                
+            }
+
+            // menu
+            $("#mnu").menu();
+
+            // spinner
+            $("input#txtSel").spinner({
+                // 设置最大最小值
+                max: 20,
+                min: 1,
+                // 设置每次增减的步数
+                step: 3,
+                // 设置递增/递减事件
+                spin: function(e, ui) {
+                    spnPrev.style.backgroundColor = (ui.value%2 == 0) ? "#f00" : "#0f0";
+                },
+                // 设置按钮的change事件
+                change: function(e, ui) {
+                    var self = $(this),
+                        temp = self.spinner("value");
+                    if(temp < 1) {
+                        self.spinner("value", 1);
+                    } else if(temp > 20) {
+                        self.spinner("value", 20);
+                    } /*else if(temp%2 == 0) {
+                        spnPrev.style.backgroundColor = "#f00";
+                    } else {
+                        spnPrev.style.backgroundColor = "#0f0";
+                    }*/
+                }
+            });
+
+            // tooltip
+            $("a#tip").tooltip({
+                // “显示”效果
+                show: {
+                    effect: "slideDown",
+                    delay: 300
+                },
+                // “隐藏”效果
+                hide: {
+                    effect: "explode",
+                    delay: 150
+                },
+                // 提示位置
+                position: {
+                    my: "left top",
+                    at: "right"
                 }
             });
         });
