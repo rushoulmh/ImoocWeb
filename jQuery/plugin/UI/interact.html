@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>交互插件</title>
+    <link rel="stylesheet" href="css/jquery-ui.min.css" />
+    <style>
+        .box {
+            width: 450px;
+            font-size: 12px;
+            background-color: #bfc;
+        }
+        #drag, #drop, #sort {
+            width: 500px;
+            border: 1px solid #ccc;
+        }
+        #drag p {
+            width: 80px;
+            cursor: move;
+        }
+        #drop .cart {
+            height: 50px;
+            cursor: move;
+        }
+        ul, ol {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        #sort li {
+            width: 60px;
+            margin: 2px 0;
+        }
+    </style>
+</head>
+<body>
+    <h3>拖放插件</h3>
+    <div class="box">
+        拖：<i>$ele</i>.draggable(<i>options</i>)<br />
+        放：<i>$ele</i>.droppable(<i>options</i>)<br />
+        排序：<i>$ele</i>.sortable(<i>options</i>)
+    </div>
+    <div>
+        <div id="drag">
+            <h3 class="ui-widget-header">拖拽区</h3>
+            <p class="ui-widget-content dgX">沿x轴拖拽</p>
+            <p class="ui-widget-content">不可接受</p>
+            <p class="ui-widget-content dg">苹果</p>
+            <p class="ui-widget-content dg">栗子</p>
+        </div>
+        <div id="drop">
+            <h3 class="ui-widget-header">放置区<span>0</span></h3>
+            <div class="cart">待填充</div>
+        </div>
+        <ul id="sort">
+            <h3 class="ui-widget-header">排序区</h3>
+            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>item1</li>
+            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>item2</li>
+            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>item3</li>
+            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>item4</li>
+            <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>item5</li>
+        </ul>
+    </div>
+
+    <script src="../vendor/jquery1.10.2.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script>
+        $(function() {
+            // draggable
+            $("#drag .dgX").draggable({
+                containment: "parent", // 只能父元素里拖动
+                axis: "x" // 沿x轴拖动
+            });
+            $("#drag p").draggable({
+                // 当未被放置在目标上时还原
+                // revert: "invalid"
+            });
+
+            // droppable
+            var count = 0;
+            $("#drop .cart").droppable({
+                // 控制哪个draggable元素可被droppable元素接受
+                accept: ".dg",
+                // 当一个可接受draggable被拖拽时，添加class到droppable
+                activeClass: "ui-state-active",
+                // 当一个可接受的draggable被覆盖在droppable上时，添加class到droppable
+                hoverClass: "ui-state-hover",
+                // 当一个可接受的draggable被放置在droppable上时触发
+                drop: function() {
+                    $(this).addClass("ui-state-highlight").html("");
+                    count++; // 内部移动会多次触发
+                    $("#drop h3 span").html(count);
+                    return false;
+                },
+                // 当draggable被拖拽出droppable时触发
+                out: function() {
+                    $(this).removeClass("ui-state-highlight");
+                    count--;
+                    $("#drop h3 span").html(count);
+                }
+            });
+
+            // sortable
+            $("#sort").sortable({
+                // 指定元素内的哪个项目可排序
+                items: "li",
+                // 要应用的class名称
+                placeholder: "sortable-placeholder",
+                // 鼠标按下后直到排序开始的时间，以毫秒计
+                delay: 2,
+                // 移动时的透明度
+                opacity: 0.5,
+                // 排序时的光标
+                cursor: "move",
+                // 是否用动画还原
+                revert: true
+            });
+        });
+    </script>
+</body>
+</html>
