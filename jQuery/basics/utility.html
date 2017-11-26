@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery工具函数</title>
+	<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+	<style>
+		body {
+			font: 14px arial,sans-serif;
+		}
+		body > div {
+			width: 600px;
+			margin: 10px 5px;
+			border: 2px solid #ccc;
+		}
+		body > div div, body > div p{
+			width: 500px;
+			margin: 2px 0;
+			padding: 2px 0;
+			background-color: #bfa;
+		}
+		ul{
+			font-size: 12px;
+			list-style: none;
+		}
+		ul *{
+			display: inline-block;
+			width: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div id="browser">
+		<h3>浏览器检测</h3>
+		<div>
+			<p><a href="http://www.runoob.com/jquery/misc-browser.html">$.browser</a>用于获取浏览器名称和版本，适用于jquery1.8-</p>
+			<p><a href="http://www.runoob.com/jquery/prop-jquery-support.html">$.support</a>是包含不同浏览器特性或漏洞的属性集，适用于jquery1.9+</p>
+		</div>
+		<button id="getBrsInfo">获取浏览器信息</button>
+		<p></p>
+	</div>
+	<div id="obj">
+		<h3>对象检测</h3>
+		<div>
+			<p>$.isEmptyObject(<i>obj</i>)检查对象是否为空（不包含任何属性）</p>
+			<p>$.isPlainObject(<i>obj</i>)判断对象是否为通过{}或new Object()创建的原始对象</p>
+		</div>
+		<button id="getObjInfo">获取对象信息</button>
+		<p></p>
+	</div>
+	<div id="node">
+		<h3>节点检测</h3>
+		<div>
+			<p>$.contains(<i>node1</i>,<i>node2</i>)检测在节点1是否包含节点2</p>
+		</div>
+		<button id="getNodeInfo">检测节点</button>
+		<p></p>
+	</div>
+	<div id="op">
+		<h3>数据操作</h3>
+		<div>
+			<p>$.trim(<i>str</i>)去除字符串两端的空格</p>
+			<p>$.merge(<i>arr1</i>,<i>arr2</i>)将arr2合并到arr1中</p>
+			<p>$.inArray(<i>val</i>,<i>arr</i>[,<i>fromIdx</i>]?)从指定索引值fromIdx开始查找数组项val的索引值</p>
+		</div>
+		<button id="btnOP">操作</button>
+		<p></p>
+	</div>
+	<div id="ext">
+		<h3>扩展函数</h3>
+		<div>
+			<p>$.extend(<i>obj</i>)将obj合并到jQuery对象</p>
+			<p>$.extend([<i>isDeep</i>,]<i>target</i>,<i>obj1</i>[,<i>objN</i>]*)将所有obj合并到target对象；isDeep==true表示深拷贝，省略代表false</p>
+			<p>$.fn.extend(<i>obj</i>)将obj合并到JQ原型</p>
+		</div>
+		<button id="btnExt">合并2个obj</button>
+		<p>obj1 = {apple:0, banana:{weight:52, price:100}, cherry:50}<br />
+		obj2 = {banana:{price:170}, durian:20}</p>
+	</div>
+
+	<script>
+		(function($) {
+			// 检测浏览器信息
+			$("#getBrsInfo").click(function() {
+				var str = "您的浏览器名称：";
+				// 名称
+				if($.browser.chrome) str += "Chrome";
+				else if($.browser.mozilla) str += "Mozilla Firefox";
+				else if($.browser.msie) str += "IE";
+				else str += "Other";
+				// 版本号
+				str += "<br />版本号：" + $.browser.version;
+				// 是否为标准盒模型
+				str += "<br />盒子模型：" + ($.support.boxModel ? "W3C盒子模型" : "IE盒子模型");
+				// 是否支持opacity
+				if(!$.support.opacity)
+					str += "<br />IE6-8不支持opacity";
+				// IE中能否自动去空格
+				if(!$.support.leadingWhitespace)
+					str += "<br />IE6-8不支持leadingWhitespace";
+				$("#browser p:last").html(str);
+			});
+			// 兼容1.8-的$.browser
+			$.browser = (function() {
+				var matched, temp = {};
+				$.uaMatch = function(ua) {
+					ua = ua.toLowerCase();
+					var m = /(chrome)[ \/]([\w.]+)/.exec(ua)
+						|| /(webkit)[ \/]([\w.]+)/.exec(ua)
+						|| /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua)
+						|| /(msie) ([\w.]+)/.exec(ua)
+						|| ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua)
+						|| [];
+					return {
+						browser: m[1] || "",
+						version: m[2] || "0"
+					};
+				}
+				matched = $.uaMatch(navigator.userAgent);
+				if(matched.browser) {
+					temp[matched.browser] = true;
+					temp.version = matched.version;
+				}
+				if(temp.chrome) {
+					temp.webkit = true;
+				} else if(temp.safari) {
+					temp.safari = true;
+				}
+
+				return temp;
+			})();
+
+			// 检测对象信息
+			$("#getObjInfo").click(function() {
+				var obj = {age: 13}, str = "对象{age:13}是 ";
+				// var param = "test", str = "对象\"test\"是 ";
+				if($.isEmptyObject(obj)) str += "空对象，";
+				if($.isPlainObject(obj)) str += "原始对象，";
+				if($.isFunction(obj)) str += "函数，";
+				str = str.slice(0, -1);
+				$("#obj p:last").html(str);
+			});
+
+			// 检测节点信息
+			$("#getNodeInfo").click(function() {
+				var nod1 = document.body,
+					nod2 = nod1.firstElementChild || nod1.firstChild;
+				var str = "节点body " + ($.contains(nod1, nod2) ? "包含" : "不包含") + " 节点firstChild";
+				$("#node p:last").html(str);
+			});
+
+			// 数据操作
+			$("#btnOP").click(function() {
+				var str = " li min  ";
+				var arr1 = [1,2,3,1], arr2 = ["a","b","c"];
+				var temp = "$.trim(\" li min  \") == \"" + $.trim(str) + "\"";
+				temp += "<br />$.merge([1,2,3,1], [a,b,c]) == [" + $.merge(arr1,arr2) + "]";
+				temp += "<br />$.inArray(1, [" + arr1 + "], 2) == " + $.inArray(1,arr1,2);
+				$("#op p:last").html(temp);
+			});
+
+			// 合并对象
+			$("#btnExt").click(function() {
+				var obj1 = {
+					apple: 0,
+					banana: {weight: 52, price: 100},
+					cherry: 50
+				},
+					obj2 = {
+						banana: {price: 170},
+						durian: 20
+					},
+					printObj = {};
+				$.extend(obj1, obj2);
+				printObj = (typeof JSON != "undefined") ? JSON.stringify : function(o) {
+					var arr = [];
+					$.each(o, function(key, val) {
+						var next = key + ": ";
+						next += $.isPlainObject(val) ? printObj(val) : val;
+						arr.push(next);
+					});
+					return "{ " + arr.join(",") + " }";
+				};
+				$("#ext p:last").html(printObj(obj1));
+			});
+		})(jQuery);
+	</script>
+</body>
+</html>

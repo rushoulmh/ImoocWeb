@@ -27,6 +27,9 @@
 			display: inline-block;
 			width: 30px;
 		}
+		#arr li{
+			display: block;
+		}
 	</style>
 </head>
 <body>
@@ -45,24 +48,25 @@
 		<p></p>
 	</div>
 	<div id="arr">
-		<h3>.inArray</h3>
+		<h3>.toArray</h3>
 		<div>
-			<p>用法：jQuery.inArray(<i>value</i>, <i>array</i>[, <i>fromIndex</i>]?)</p>
-		</div>		
-		<select>
-			<option value="1">默认查找</option>
-			<option value="2">指定索引开始的位置</option>
-		</select>
-		<button>查找数组项的索引值</button>
+			<p>用法：<i>selector</i>.toArray()</p>
+		</div>
+		<ul>
+			<li>item01</li>
+			<li>item02</li>
+			<li>item03</li>
+		</ul>
+		<button>将元素转换为数组</button>
 		<p></p>
 	</div>
-	<div id="trim">
-		<h3>.trim</h3>
+	<div id="param">
+		<h3>.param</h3>
 		<div>
-			<p>用法：jQuery.trim(<i>string</i>)</p>
+			<p>用法：jQuery.param(<i>object</i>)</p>
 		</div>
-		<input type="text" value="	这里有 空白 " />
-		<button>去掉两端空白</button>
+		<button>序列化编码</button>
+		<p>{name:&quot;lee&quot;, age:12}</p>
 	</div>
 	<div id="get">
 		<h3>.get</h3>
@@ -111,7 +115,7 @@
 	<script>
 		var div1 = $("#each"),
 			div2 = $("#arr"),
-			div3 = $("#trim"),
+			div3 = $("#param"),
 			div4 = $("#get"),
 			div5 = $("#idx");
 
@@ -138,29 +142,25 @@
 			}
 		});
 
-		// .inArray
+		// .toArray
 		div2.find("button").click(function(){
 			var p = div2.find("p:last"),
-				val = div2.find("select").val(),
-				idx = 0;
-			p.empty();
-
-			switch(val){
-				case "1": // 默认从索引0开始查找
-					idx = $.inArray("a", ["a", "b", "c", "d"]);
-					p.text("'a'在数组['a', 'b', 'c', 'd']中的索引是 " + idx);
-					break;
-				case "2": // 从指定索引位置开始查找
-					idx = $.inArray("a", ["a", "b", "c", "a", "o"], 2);
-					p.text("'a'在数组['a', 'b', 'c', 'a', 'o']中的索引是 " + idx);
-					break;
-			}
+				lis = div2.find("ul li"),
+				tmp = "";
+			$.each(lis.toArray(), function(i, item){
+				tmp += item.innerHTML + ",";
+			});
+			p.text(tmp.slice(0, -1));
 		});
 
-		// .trim
+		// .param
 		div3.find("button").click(function(){
-			var input = div3.find("input");
-			input.val($.trim(input.val()));
+			var p = div3.find("p:last");
+			var obj = {
+				name: "lee",
+				age: 12
+			};
+			p.text($.param(obj));
 		});
 
 		// .get

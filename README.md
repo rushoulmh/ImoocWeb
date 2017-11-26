@@ -30,6 +30,7 @@
     - dom1：节点创建、插入和删除，来自《[jQuery基础(二)—DOM篇](http://www.imooc.com/learn/530)》第2~4章
     - dom2：节点复制和替换，来自《[jQuery基础(二)—DOM篇](http://www.imooc.com/learn/530)》第5~6章
     - miscellaneous：JQ杂项方法，来自《[jQuery基础(四)—动画篇](http://www.imooc.com/learn/430)》第6章
+    - utility：JQ工具函数，来自《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第4章
   - event
     - mouse：鼠标事件，来自《[jQuery基础(三)—事件篇](http://www.imooc.com/learn/429)》第2章
     - form：表单事件，来自《[jQuery基础(三)—事件篇](http://www.imooc.com/learn/429)》第3章
@@ -42,8 +43,8 @@
     - animate：自定义动画，来自《[jQuery基础(四)—动画篇](http://www.imooc.com/learn/430)》第5章
   - plugin
     - Validation：表单验证插件，来自《[jQuery插件——Validation Plugin](http://www.imooc.com/learn/385)》
-    - Usual：常用插件（表单插件、cookie插件、图片插件等），《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第2章
-    - UI：UI型插件（拖放插件、tabs插件等），《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第3章
+    - Usual：常用插件（表单插件、cookie插件、图片插件等），来自《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第2章
+    - UI：UI型插件（拖放插件、tabs插件等），来自《[jQuery基础(五)一Ajax应用与常用插件](http://www.imooc.com/learn/762)》第3章
 - Exercise
   - menubar：仿京东导航菜单（CSS版和JS版），来自《[商城分类导航效果](http://www.imooc.com/learn/174)》
   - navPage：定位导航（JS版和JQ版），来自《[网页定位导航特效](http://www.imooc.com/learn/56)》
