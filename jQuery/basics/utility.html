@@ -20,12 +20,11 @@
 			background-color: #bfa;
 		}
 		ul{
-			font-size: 12px;
-			list-style: none;
+			border: 1px solid #ccc;
 		}
-		ul *{
-			display: inline-block;
-			width: 30px;
+		.focus {
+			background-color: #0ff;
+			cursor: pointer;
 		}
 	</style>
 </head>
@@ -73,9 +72,13 @@
 			<p>$.extend([<i>isDeep</i>,]<i>target</i>,<i>obj1</i>[,<i>objN</i>]*)将所有obj合并到target对象；isDeep==true表示深拷贝，省略代表false</p>
 			<p>$.fn.extend(<i>obj</i>)将obj合并到JQ原型</p>
 		</div>
-		<button id="btnExt">合并2个obj</button>
-		<p>obj1 = {apple:0, banana:{weight:52, price:100}, cherry:50}<br />
-		obj2 = {banana:{price:170}, durian:20}</p>
+		<ul id="extlst">
+			<li>obj1 = {apple:0, banana:{weight:52, price:100}, cherry:50}</li>
+			<li>obj2 = {banana:{price:170}, durian:20}</li>
+			<li>自定义插件：鼠标经过li时改变li背景色</li>
+		</ul>
+		<button id="btnExt1">合并2个obj</button>
+		<button id="btnExt2">自定义JQ插件</button>
 	</div>
 
 	<script>
@@ -160,7 +163,7 @@
 			});
 
 			// 合并对象
-			$("#btnExt").click(function() {
+			$("#btnExt1").click(function() {
 				var obj1 = {
 					apple: 0,
 					banana: {weight: 52, price: 100},
@@ -171,7 +174,12 @@
 						durian: 20
 					},
 					printObj = {};
+				// 将obj2合并到obj1中
+				// 浅拷贝，obj2.banana直接覆盖obj1.banana
 				$.extend(obj1, obj2);
+				// 深拷贝，banana.price会覆盖，但banana.weight保留
+				// $.extend(true, obj1, obj2);
+				// 显示合并结果
 				printObj = (typeof JSON != "undefined") ? JSON.stringify : function(o) {
 					var arr = [];
 					$.each(o, function(key, val) {
@@ -181,7 +189,34 @@
 					});
 					return "{ " + arr.join(",") + " }";
 				};
-				$("#ext p:last").html(printObj(obj1));
+				$("#extlst li:last").html(printObj(obj1));
+			});
+			// 自定义插件
+			$("#btnExt2").click(function() {
+				// 方法一：添加到jQuery对象上
+				$.extend({
+					liFocus: function(item, clsName) {
+						item.hover(function() { // mouseenter
+							$(this).addClass(clsName);
+							// $(this).css("background-color", color);
+						}, function() { // mouseleave
+							$(this).removeClass(clsName);
+							// $(this).css("background-color", "transparent");
+						});
+					}
+				});
+				$.liFocus($("#extlst li"), "focus");
+				// 方法二：添加到jQuery原型上
+				/*$.fn.extend({
+					liFocus: function(clsName) {
+						$(this).hover(function() { // mouseenter
+							$(this).addClass(clsName);
+						}, function() { // mouseleave
+							$(this).removeClass(clsName);
+						});
+					}
+				});
+				$("#extlst li").liFocus("focus");*/
 			});
 		})(jQuery);
 	</script>
